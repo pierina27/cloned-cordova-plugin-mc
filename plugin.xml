@@ -71,7 +71,7 @@
         </config-file>
 		<config-file target="res/values/strings.xml" parent="/resources">
 			<string name="et_app_id_dev">$PRODAPPID</string>
-			<string name="et_access_token_dev">$PRODACCESSTOKEN/string>
+			<string name="et_access_token_dev">$PRODACCESSTOKEN</string>
 			<string name="gcm_sender_id_dev">$PRODGCMSENDERID</string>
 			<string name="et_app_id_prod">$PRODAPPID</string>
 			<string name="et_access_token_prod">$PRODACCESSTOKEN</string>
