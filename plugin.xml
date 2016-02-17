@@ -25,6 +25,14 @@
     <license>Apache 2.0</license>
     <keywords>cordova,marketing cloud,plugin</keywords>
 	
+	<info>
+			
+			
+			//   MC Plugin by Leadclic Solutions   //
+			
+			
+	</info>
+	
 	<preference name="PRODAPPID" />
 	<preference name="PRODACCESSTOKEN" />
 	<preference name="PRODGCMSENDERID" />
@@ -94,12 +102,48 @@
         <js-module src="www/MCPlugin.js" name="MCPlugin">
 			<clobbers target="MCPlugin" />
         </js-module>
-        <info>
-			
-			
-			//   MC Plugin by Leadclic Solutions   //
-			
-			
-		</info>
     </platform>
+	
+	
+	<platform name="ios">
+        <config-file target="*-Info.plist" parent="ETAppSettings">
+                <dict>
+                    <key>ApplicationID-Dev</key>
+                    <string>$PRODAPPID</string>
+                    <key>AccessToken-Dev</key>
+                    <string>$PRODACCESSTOKEN</string>
+                    <key>ApplicationID-Prod</key>
+                    <string>$PRODAPPID</string>
+                    <key>AccessToken-Prod</key>
+                    <string>$PRODACCESSTOKEN</string>
+                    <key>UseGeofences</key>
+                    <string>false</string>
+                    <key>UseAnalytics</key>
+                    <string>false</string>
+                </dict>
+        </config-file>
+        <config-file target="config.xml" parent="/*">
+            <feature name="ETPush">
+                <param name="ios-package" value="ETSdkWrapper"/>
+            </feature>
+        </config-file>
+        <header-file src="src/ios/MCPlugin.h" />
+        <source-file src="src/ios/MCPlugin.m" />
+		
+        <source-file src="src/ios/etpushsdk/libJB4ASDK-4.1.0.a" framework="true" />
+        <header-file src="src/ios/etpushsdk/ETAnalytics.h" />
+        <header-file src="src/ios/etpushsdk/ETGenericUpdate.h" />
+		<header-file src="src/ios/etpushsdk/ETLandingPagePresenter.h" />
+		<header-file src="src/ios/etpushsdk/ETLocationManager.h" />
+		<header-file src="src/ios/etpushsdk/ETLocationUpdate.h" />
+		<header-file src="src/ios/etpushsdk/ETMessage.h" />
+		<header-file src="src/ios/etpushsdk/ETPush.h" />
+		<header-file src="src/ios/etpushsdk/ETRegion.h" />
+		<header-file src="src/ios/etpushsdk/ExactTargetEnhancedPushDataSource.h" />
+		<header-file src="src/ios/etpushsdk/PushConstants.h" />
+
+    </platform>
+	
+	
+	
 </plugin>

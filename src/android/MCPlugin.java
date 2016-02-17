@@ -59,17 +59,17 @@ public class MCPlugin extends CordovaPlugin {
 			Log.d(TAG, "ERROR: onRegistrationEvent" + e.getMessage());
 		}
 		
-		cordova.getThreadPool().execute(new Runnable() {
-			public void run() {
-			  //
-			}
-		});
+		//cordova.getThreadPool().execute(new Runnable() {
+		//	public void run() {
+		//	  //
+		//	}
+		//});
 		
-		cordova.getActivity().runOnUiThread(new Runnable() {
-            public void run() {
-              //
-            }
-        });
+		//cordova.getActivity().runOnUiThread(new Runnable() {
+        //    public void run() {
+        //      //
+        //    }
+        //});
 		 
 		return true;
 	}
