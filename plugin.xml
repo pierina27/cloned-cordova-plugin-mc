@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+-->
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+           id="cordova-plugin-mc"
+      version="1.2.2">
+    <name>MCPlugin</name>
+    <description>Cordova Marketing Cloud Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,marketing cloud,plugin</keywords>
+
+    <engines>
+      <engine name="cordova-android" version=">=4.0.0" />
+    </engines>
+
+    <platform name="android">
+		<config-file target="AndroidManifest.xml" parent="/manifest">
+			<uses-permission android:name="android.permission.INTERNET" />
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+			<permission android:name="${applicationId}.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+			<uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
+			<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+			<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+			<uses-permission android:name="android.permission.WAKE_LOCK" />
+		</config-file>
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<receiver android:name="com.exacttarget.etpushsdk.ETPushReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+				<intent-filter>
+					<action android:name="${applicationId}.MESSAGE_OPENED" />
+					<action android:name="com.exacttarget.etpushsdk.SEND_REGISTRATION" />
+					<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+					<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+					<action android:name="android.intent.action.ACTION_SHUTDOWN" />
+					<action android:name="android.intent.action.AIRPLANE_MODE" />
+					<category android:name="${applicationId}" />
+				</intent-filter>
+				<intent-filter>
+					<action android:name="android.intent.action.PACKAGE_REPLACED" />
+					<data android:scheme="package" />
+				</intent-filter>
+			</receiver>
+			<service android:enabled="true" android:name="com.exacttarget.etpushsdk.ETPushService" />
+			<activity android:label="Landing Page" android:name="com.exacttarget.etpushsdk.ETLandingPagePresenter" />
+		</config-file>
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="MCPlugin" >
+                <param name="android-package" value="io.cordova.hellocordova.MCPlugin"/>
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+		<config-file target="res/values/strings.xml" parent="/resources">
+			<string name="et_app_id_dev">6a6e3c4a-0a42-4ae2-bab2-407101a3f53d</string>
+			<string name="et_access_token_dev">hfwpt7dtkaee84vyzwy7bgs4</string>
+			<string name="gcm_sender_id_dev">55512861403</string>
+			<string name="et_app_id_prod">6a6e3c4a-0a42-4ae2-bab2-407101a3f53d</string>
+			<string name="et_access_token_prod">hfwpt7dtkaee84vyzwy7bgs4</string>
+			<string name="gcm_sender_id_prod">55512861403</string>
+ 		</config-file>
+		
+		<framework src="com.android.support:support-v13:23+" />
+        <framework src="com.google.android.gms:play-services-gcm:+" />
+		
+        <source-file src="src/android/MCPlugin.java" target-dir="src/io/cordova/hellocordova" />
+		<source-file src="src/android/MainApplication.java" target-dir="src/io/cordova/hellocordova" />
+		<source-file src="src/android/etsdk-4.2.0.jar" target-dir="libs" />
+        <source-file src="src/android/jackson-databind-2.2.3.jar" target-dir="libs" />
+        <source-file src="src/android/joda-convert-1.5.jar" target-dir="libs" />
+        <source-file src="src/android/ormlite-android-4.47.jar" target-dir="libs" />
+        <source-file src="src/android/ormlite-core-4.47.jar" target-dir="libs" />
+		
+		<hook type="after_plugin_add" src="src/android/hooks/android_app_name.js" />
+
+        <js-module src="www/MCPlugin.js" name="MCPlugin">
+			<clobbers target="MCPlugin" />
+        </js-module>
+        <info>
+			
+			
+			//   MC Plugin by Leadclic Solutions   //
+			
+			
+		</info>
+    </platform>
+</plugin>
