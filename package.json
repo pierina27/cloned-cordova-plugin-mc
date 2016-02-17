@@ -1,0 +1,19 @@
+{
+    "version": "0.1",
+    "name": "cordova-plugin-mc",
+    "cordova_name": "MarketingCloud Push Plugin",
+    "description": "MarketingCloud Push Plugin",
+    "license": "Apache 2.0",
+    "repo": "",
+    "issue": "",
+    "keywords": [
+        "cordova",
+        "push"
+    ],
+    "platforms": [
+        "android",
+		"ios",
+    ],
+    "engines": [],
+    "englishdoc": ""
+}
