@@ -124,7 +124,7 @@
         </config-file>
         <config-file target="config.xml" parent="/*">
             <feature name="ETPush">
-                <param name="ios-package" value="ETSdkWrapper"/>
+                <param name="ios-package" value="MCPlugin"/>
             </feature>
         </config-file>
         <header-file src="src/ios/MCPlugin.h" />
