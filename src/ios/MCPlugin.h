@@ -8,14 +8,7 @@
 
 + (MCPlugin *) etPlugin;
 
-- (void)isPushEnabled:(CDVInvokedUrlCommand*)command;
-- (void)setSubscriberKey:(CDVInvokedUrlCommand*)command;
-- (void)addTag:(CDVInvokedUrlCommand*)command;
-- (void)removeTag:(CDVInvokedUrlCommand*)command;
-- (void)addAttribute:(CDVInvokedUrlCommand*)command;
-- (void)removeAttribute:(CDVInvokedUrlCommand*)command;
-- (void)resetBadgeCount:(CDVInvokedUrlCommand*)command;
-- (void)registerForNotifications:(CDVInvokedUrlCommand*)command;
+- (void)enablePush:(CDVInvokedUrlCommand*)command;
 - (void)notifyOfMessage:(NSData*) payload;
 
 @end

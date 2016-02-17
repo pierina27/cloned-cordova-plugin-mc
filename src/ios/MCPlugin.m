@@ -11,7 +11,7 @@
 
 @implementation MCPlugin
 
-static NSString *notificationCallback = "MCPlugin.onNotificationReceived";
+static NSString *notificationCallback = @"MCPlugin.onNotificationReceived";
 static MCPlugin *etPluginInstance;
 
 + (MCPlugin *) etPlugin {
