@@ -39,7 +39,7 @@ static MCPlugin *etPluginInstance;
     NSString * notifyJS = [NSString stringWithFormat:@"%@('%@');", notificationCallback, JSONString];
     NSLog(@"stringByEvaluatingJavaScriptFromString %@", notifyJS);
     
-    NSString *jsResults = [self.webView evaluateJavaScript:completionHandler:notifyJS];
+    NSString *jsResults = [self.webView stringByEvaluatingJavaScriptFromString:notifyJS];
 }
 
 
