@@ -24,6 +24,10 @@
     <description>Cordova Marketing Cloud Plugin</description>
     <license>Apache 2.0</license>
     <keywords>cordova,marketing cloud,plugin</keywords>
+	
+	<preference name="PRODAPPID" />
+	<preference name="PRODACCESSTOKEN" />
+	<preference name="PRODGCMSENDERID" />
 
     <engines>
       <engine name="cordova-android" version=">=4.0.0" />
@@ -66,12 +70,12 @@
             </feature>
         </config-file>
 		<config-file target="res/values/strings.xml" parent="/resources">
-			<string name="et_app_id_dev">6a6e3c4a-0a42-4ae2-bab2-407101a3f53d</string>
-			<string name="et_access_token_dev">hfwpt7dtkaee84vyzwy7bgs4</string>
-			<string name="gcm_sender_id_dev">55512861403</string>
-			<string name="et_app_id_prod">6a6e3c4a-0a42-4ae2-bab2-407101a3f53d</string>
-			<string name="et_access_token_prod">hfwpt7dtkaee84vyzwy7bgs4</string>
-			<string name="gcm_sender_id_prod">55512861403</string>
+			<string name="et_app_id_dev">$PRODAPPID</string>
+			<string name="et_access_token_dev">$PRODACCESSTOKEN/string>
+			<string name="gcm_sender_id_dev">$PRODGCMSENDERID</string>
+			<string name="et_app_id_prod">$PRODAPPID</string>
+			<string name="et_access_token_prod">$PRODACCESSTOKEN</string>
+			<string name="gcm_sender_id_prod">$PRODGCMSENDERID</string>
  		</config-file>
 		
 		<framework src="com.android.support:support-v13:23+" />
