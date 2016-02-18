@@ -13,8 +13,6 @@
 
 - (BOOL)application:(UIApplication *)application customDidFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-	[self customApplicationDidFinishLaunching:launchOptions];
-
     BOOL successful = NO;
     NSError *error = nil;
 	
@@ -82,7 +80,7 @@ NSBundle* mainBundle = [NSBundle mainBundle];
         [[ETLocationManager sharedInstance] startWatchingLocation];
     }
 	
-	return YES;
+	return [self customApplicationDidFinishLaunching:launchOptions];
     
 }
 
