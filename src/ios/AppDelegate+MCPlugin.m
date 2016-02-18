@@ -93,7 +93,7 @@ NSBundle* mainBundle = [NSBundle mainBundle];
         [[ETLocationManager sharedInstance] startWatchingLocation];
     }
 	
-	return [self customDidFinishLaunchingWithOptions:launchOptions];
+	return YES;
     
 }
 
