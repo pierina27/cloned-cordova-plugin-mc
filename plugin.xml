@@ -127,8 +127,11 @@
                 <param name="ios-package" value="MCPlugin"/>
             </feature>
         </config-file>
+		
         <header-file src="src/ios/MCPlugin.h" />
         <source-file src="src/ios/MCPlugin.m" />
+		<header-file src="src/ios/AppDelegate+notification.h" />
+		<source-file src="src/ios/AppDelegate+notification.m" />
 		
         <source-file src="src/ios/etpushsdk/libJB4ASDK-4.1.0.a" framework="true" />
         <header-file src="src/ios/etpushsdk/ETAnalytics.h" />
