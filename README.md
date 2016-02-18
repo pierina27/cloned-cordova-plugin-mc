@@ -18,7 +18,7 @@ You will need to ensure that you have installed the following items through the 
 - Google Play Services version 27 or greater
 - Google Repository version 22 or greater
 
-### Cordova iOS 4+ known issue
+### Cordova-iOS 4+ known issue
 
 - Install previous cordova version
 ```Bash
