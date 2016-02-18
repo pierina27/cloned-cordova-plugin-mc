@@ -7,24 +7,14 @@
 @implementation AppDelegate (MCPlugin)
 
 + (void)load {  
-	Method original, swizzled;
+    Method original =    class_getInstanceMethod(self, @selector(application:didFinishLaunchingWithOptions:));  
+    Method custom =    class_getInstanceMethod(self, @selector(application:customDidFinishLaunchingWithOptions:));  
+    method_exchangeImplementations(original, custom);  
+}  
 
-    original = class_getInstanceMethod(self, @selector(init));
-    swizzled = class_getInstanceMethod(self, @selector(swizzled_init));
-    method_exchangeImplementations(original, swizzled);
-}
+- (BOOL)application:(UIApplication *)application customDidFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-- (AppDelegate *)swizzled_init
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(createNotificationChecker:)
-                                                 name:@"UIApplicationDidFinishLaunchingNotification" object:nil];
-
-    // This actually calls the original init method over in AppDelegate. Equivilent to calling super
-    // on an overrided method, this is not recursive, although it appears that way. neat huh?
-    return [self swizzled_init];
-}
-
-- (BOOL)application:(UIApplication *)application createNotificationChecker:(NSDictionary *)launchOptions {
+	[self application:application customDidFinishLaunchingWithOptions:launchOptions];
 
     BOOL successful = NO;
     NSError *error = nil;

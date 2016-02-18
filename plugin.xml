@@ -33,6 +33,10 @@
 			
 	</info>
 	
+	<js-module src="www/MCPlugin.js" name="MCPlugin">
+			<clobbers target="MCPlugin" />
+        </js-module>
+	
 	<preference name="PRODAPPID" />
 	<preference name="PRODACCESSTOKEN" />
 	<preference name="PRODGCMSENDERID" />
@@ -99,9 +103,6 @@
 		
 		<hook type="after_plugin_add" src="src/android/hooks/android_app_name.js" />
 
-        <js-module src="www/MCPlugin.js" name="MCPlugin">
-			<clobbers target="MCPlugin" />
-        </js-module>
     </platform>
 	
 	
