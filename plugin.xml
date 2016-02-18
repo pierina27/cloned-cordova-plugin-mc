@@ -130,8 +130,8 @@
 		
         <header-file src="src/ios/MCPlugin.h" />
         <source-file src="src/ios/MCPlugin.m" />
-		<header-file src="src/ios/MCPluginAppDelegate.h" />
-		<source-file src="src/ios/MCPluginAppDelegate.m" />
+		<header-file src="src/ios/AppDelegate+MCPlugin.h" />
+		<source-file src="src/ios/AppDelegate+MCPlugin.m" />
 		
         <source-file src="src/ios/etpushsdk/libJB4ASDK-4.1.0.a" framework="true" />
         <header-file src="src/ios/etpushsdk/ETAnalytics.h" />
