@@ -124,7 +124,7 @@
                 </dict>
         </config-file>
         <config-file target="config.xml" parent="/*">
-            <feature name="ETPush">
+            <feature name="MCPlugin">
                 <param name="ios-package" value="MCPlugin"/>
             </feature>
         </config-file>
@@ -147,6 +147,7 @@
 		<header-file src="src/ios/etpushsdk/PushConstants.h" />
 		<framework src="libsqlite3.dylib" />
         <framework src="CoreLocation.framework/" />
+		<framework src="Security.framework/" />
     </platform>
 	
 	

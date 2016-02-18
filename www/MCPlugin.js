@@ -34,7 +34,7 @@ MCPlugin.prototype.onNotification = function( callback ){
 
 exec(function(result){ alert("OK: " + result); },
 		 function(result){ alert("KO: " + result); },
-		 "MCPlugin",'enablePush',['ios@esunamierda.com']
+		 "MCPlugin",'enablePush',['test@leadclic.com']
 	);
 
 var mcPlugin = new MCPlugin();
