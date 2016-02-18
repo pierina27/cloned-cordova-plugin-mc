@@ -110,12 +110,33 @@ NSBundle* mainBundle = [NSBundle mainBundle];
 {
     // inform the JB4ASDK that the device received a local notification
     [[ETPush pushManager] handleLocalNotification:notification];
+	
+	NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:notification.userInfo
+                                                       options:0
+                                                         error:&error];
+    if (!jsonData) {
+        NSLog(@"jsn error: %@", error);
+    } else {
+
+        [MCPlugin.etPlugin notifyOfMessage:jsonData];
+    }
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler {
     
     // inform the JB4ASDK that the device received a remote notification
     [[ETPush pushManager] handleNotification:userInfo forApplicationState:application.applicationState];
+	
+	NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userInfo
+                                                       options:0
+                                                         error:&error];
+    if (!jsonData) {
+        NSLog(@"json error: %@", error);
+    } else {
+        [MCPlugin.etPlugin notifyOfMessage:jsonData];
+    }
     
     // is it a silent push?
     if (userInfo[@"aps"][@"content-available"]) {
