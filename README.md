@@ -4,9 +4,9 @@
 ##Installation
 ```Bash
 cordova plugin add https://github.com/soporteleadclic/cordova-plugin-mc \
-	--variable PRODAPPID='6a6e3c4a-0a42-4ae2-bab2-407101a3f53d' \
-	--variable PRODACCESSTOKEN='hfwpt7dtkaee84vyzwy7bgs4' \
-	--variable PRODGCMSENDERID='55512861403' \
+	--variable PRODAPPID='xxxxx-xxxx-xxxx-xxxx-xxxxxxxx' \
+	--variable PRODACCESSTOKEN='xxxxxxxxxxxxxxxxxx' \
+	--variable PRODGCMSENDERID='xxxxxxxxxxxxxx' \
 
 ```
 
