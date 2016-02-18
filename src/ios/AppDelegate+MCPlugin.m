@@ -1,13 +1,19 @@
-#import "AppDelegate+notification.h"
+#import "AppDelegate+MCPlugin.h"
 #import "ETPush.h"
 #import "MainViewController.h"
 #import <Cordova/CDVPlugin.h>
 
-@implementation AppDelegate
+@implementation AppDelegate (MCPlugin)
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
++ (void)load {  
+    Method original =    class_getInstanceMethod(self, @selector(didFinishLaunchingWithOptions:));  
+    Method custom =    class_getInstanceMethod(self, @selector(customDidFinishLaunchingWithOptions:));  
+    method_exchangeImplementations(original, custom);  
+}  
 
-	[super application:application didFinishLaunchingWithOptions:launchOptions];
+- (BOOL)application:(UIApplication *)application customDidFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+	[self customApplicationDidFinishLaunching:launchOptions];
 
     BOOL successful = NO;
     NSError *error = nil;
