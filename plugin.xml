@@ -129,6 +129,12 @@
             </feature>
         </config-file>
 		
+		<config-file target="*-Info.plist" parent="UIBackgroundModes">
+           <array>
+               <string>remote-notification</string>
+           </array>
+       </config-file>
+		
         <header-file src="src/ios/MCPlugin.h" />
         <source-file src="src/ios/MCPlugin.m" />
 		<header-file src="src/ios/AppDelegate+MCPlugin.h" />
