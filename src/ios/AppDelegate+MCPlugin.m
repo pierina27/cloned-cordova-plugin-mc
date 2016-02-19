@@ -1,5 +1,6 @@
 #import "AppDelegate+MCPlugin.h"
 #import "ETPush.h"
+#import "MCPlugin.h"
 #import "MainViewController.h"
 #import <Cordova/CDVPlugin.h>
 #import <objc/runtime.h>
@@ -111,6 +112,7 @@ NSBundle* mainBundle = [NSBundle mainBundle];
     // inform the JB4ASDK that the device received a local notification
     [[ETPush pushManager] handleLocalNotification:notification];
 	
+	/// MCPLUGIN START BLOCK
 	NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:notification.userInfo
                                                        options:0
@@ -121,6 +123,7 @@ NSBundle* mainBundle = [NSBundle mainBundle];
 
         [MCPlugin.etPlugin notifyOfMessage:jsonData];
     }
+	/// MCPLUGIN FINAL BLOCK
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler {
@@ -128,6 +131,7 @@ NSBundle* mainBundle = [NSBundle mainBundle];
     // inform the JB4ASDK that the device received a remote notification
     [[ETPush pushManager] handleNotification:userInfo forApplicationState:application.applicationState];
 	
+	/// MCPLUGIN START BLOCK
 	NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userInfo
                                                        options:0
@@ -137,6 +141,7 @@ NSBundle* mainBundle = [NSBundle mainBundle];
     } else {
         [MCPlugin.etPlugin notifyOfMessage:jsonData];
     }
+	/// MCPLUGIN FINAL BLOCK
     
     // is it a silent push?
     if (userInfo[@"aps"][@"content-available"]) {
