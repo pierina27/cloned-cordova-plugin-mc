@@ -7,8 +7,10 @@
 
 @implementation AppDelegate (MCPlugin)
 
+static NSData *lastPush;
+
 + (void)load {  
-    Method original =    class_getInstanceMethod(self, @selector(application:didFinishLaunchingWithOptions:));  
+    Method original =  class_getInstanceMethod(self, @selector(application:didFinishLaunchingWithOptions:));  
     Method custom =    class_getInstanceMethod(self, @selector(application:customDidFinishLaunchingWithOptions:));  
     method_exchangeImplementations(original, custom);  
 }  
@@ -139,25 +141,41 @@ NSBundle* mainBundle = [NSBundle mainBundle];
     if (!jsonData) {
         NSLog(@"json error: %@", error);
     } else {
-        [MCPlugin.etPlugin notifyOfMessage:jsonData];
+		// app is in the foreground so call notification callback
+        if (application.applicationState == UIApplicationStateActive) {
+			NSLog(@"app active");
+			[MCPlugin.etPlugin notifyOfMessage:jsonData];
+			[[ETPush pushManager] resetBadgeCount];
+		// app is in background or in stand by
+		}else{
+			NSLog(@"APP WAS CLOSED DURING PUSH RECEPTION (saved)");
+			self.lastPush = jsonData;
+		}
     }
+	
 	/// MCPLUGIN FINAL BLOCK
     
-    // is it a silent push?
-    if (userInfo[@"aps"][@"content-available"]) {
-        // received a silent remote notification...
-        
-        // indicate a silent push
-        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
-    }
-    else {
-        // received a remote notification...
-        
-        // clear the badge
-        [[ETPush pushManager] resetBadgeCount];
-    }
-    
     handler(UIBackgroundFetchResultNoData);
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+
+    NSLog(@"active");
+
+    PushPlugin *pushHandler = [self getCommandInstance:@"PushNotification"];
+    if (pushHandler.clearBadge) {
+        NSLog(@"PushPlugin clearing badge");
+        //zero badge
+        application.applicationIconBadgeNumber = 0;
+    } else {
+        NSLog(@"PushPlugin skip clear badge");
+    }
+
+    if (self.lastPush) {
+        [MCPlugin.etPlugin notifyOfMessage:jsonData];
+        self.lastPush = nil;
+		[[ETPush pushManager] resetBadgeCount];
+    }
 }
 
 @end

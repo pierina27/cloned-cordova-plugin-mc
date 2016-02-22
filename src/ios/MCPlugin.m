@@ -19,6 +19,19 @@ static MCPlugin *etPluginInstance;
     return etPluginInstance;
 }
 
+- (void) ready:(CDVInvokedUrlCommand *)command
+{
+    etPluginInstance = self;
+    [self.commandDelegate runInBackground:^{
+        
+        [[ETPush pushManager] setSubscriberKey:subKey];
+        CDVPluginResult* pluginResult = nil;
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:subKey];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }];
+    
+}
+
 - (void) enablePush:(CDVInvokedUrlCommand *)command
 {
     NSString* subKey = [command.arguments objectAtIndex:0];

@@ -10,7 +10,7 @@ MCPlugin.prototype.enablePush = function(subscriberKey){
 		 "MCPlugin",'enablePush',[subscriberKey]
 	);
 }
-
+//ONLY ANDROID
 MCPlugin.prototype.disablePush = function(){
 	exec(function(result){ alert("OK: " + result); },
 		 function(result){ alert("KO: " + result); },
@@ -27,10 +27,10 @@ MCPlugin.prototype.onNotification = function( callback ){
 }
 
 //ready
-//exec(function(result){ },
-//	function(result){ },
-//	"MCPlugin",'ready',[]
-//);
+exec(function(result){ },
+	function(result){ },
+	"MCPlugin",'ready',[]
+);
 
 exec(function(result){ alert("OK: " + result); },
 		 function(result){ alert("KO: " + result); },
