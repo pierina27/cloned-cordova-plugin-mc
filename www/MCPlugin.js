@@ -19,7 +19,8 @@ MCPlugin.prototype.disablePush = function(){
 }
 
 MCPlugin.prototype.onNotificationReceived = function(payload){
-	alert(payload.alert);
+	if(typeof payload.aps = 'undefined') alert(payload.aps.alert);
+	else alert(payload.alert);
 }
 
 MCPlugin.prototype.onNotification = function( callback ){

@@ -149,7 +149,7 @@ NSBundle* mainBundle = [NSBundle mainBundle];
 		// app is in background or in stand by
 		}else{
 			NSLog(@"APP WAS CLOSED DURING PUSH RECEPTION (saved)");
-			self.lastPush = jsonData;
+			lastPush = jsonData;
 		}
     }
 	
@@ -162,20 +162,11 @@ NSBundle* mainBundle = [NSBundle mainBundle];
 
     NSLog(@"active");
 
-    PushPlugin *pushHandler = [self getCommandInstance:@"PushNotification"];
-    if (pushHandler.clearBadge) {
-        NSLog(@"PushPlugin clearing badge");
-        //zero badge
-        application.applicationIconBadgeNumber = 0;
-    } else {
-        NSLog(@"PushPlugin skip clear badge");
+    if (lastPush) {
+        [MCPlugin.etPlugin notifyOfMessage:lastPush];
+        lastPush = nil;
     }
-
-    if (self.lastPush) {
-        [MCPlugin.etPlugin notifyOfMessage:jsonData];
-        self.lastPush = nil;
-		[[ETPush pushManager] resetBadgeCount];
-    }
+	[[ETPush pushManager] resetBadgeCount];
 }
 
 @end

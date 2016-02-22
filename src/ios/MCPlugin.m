@@ -23,10 +23,9 @@ static MCPlugin *etPluginInstance;
 {
     etPluginInstance = self;
     [self.commandDelegate runInBackground:^{
-        
-        [[ETPush pushManager] setSubscriberKey:subKey];
+
         CDVPluginResult* pluginResult = nil;
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:subKey];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"OK"];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
     
