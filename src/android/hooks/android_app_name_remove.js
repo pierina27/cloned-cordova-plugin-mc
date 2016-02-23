@@ -17,7 +17,7 @@ module.exports = function(context) {
 
       var appClass = 'MainApplication';
 
-      if (data.indexOf(appClass) == -1) {
+      if (data.indexOf(appClass) != -1) {
 
         var result = data.replace('android:name="' + appClass + '"', '');
 
