@@ -19,7 +19,7 @@ module.exports = function(context) {
 
       if (data.indexOf(appClass) != -1) {
 
-        var result = data.replace('android:name="' + appClass + '"', '');
+        var result = data.replace(' android:name="' + appClass + '" ', '');
 		console.log('Removed app name hook');
 
         fs.writeFile(manifestFile, result, 'utf8', function (err) {
