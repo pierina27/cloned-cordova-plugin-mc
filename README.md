@@ -35,7 +35,7 @@ MCPlugin.enablePush(); //Device Id as identifier
 MCPlugin.enablePush('subscriber@key.com'); //Custom identifier
 ```
 
-###Disable Push Notifications
+###Disable Push Notifications (only Android)
 
 ```javascript
 MCPlugin.disablePush();
