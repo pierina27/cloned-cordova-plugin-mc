@@ -81,6 +81,7 @@
                 <param name="onload" value="true" />
             </feature>
         </config-file>
+		
 		<config-file target="res/values/strings.xml" parent="/resources">
 			<string name="et_app_id_dev">$PRODAPPID</string>
 			<string name="et_access_token_dev">$PRODACCESSTOKEN</string>
@@ -102,6 +103,7 @@
         <source-file src="src/android/ormlite-core-4.47.jar" target-dir="libs" />
 		
 		<hook type="after_plugin_add" src="src/android/hooks/android_app_name.js" />
+		<hook type="after_plugin_remove" src="src/android/hooks/android_app_name_remove.js" />
 
     </platform>
 	
