@@ -1,7 +1,5 @@
 module.exports = function(context) {
 
-	console.log('Removed app name hook');
-
   var fs = context.requireCordovaModule('fs'),
     path = context.requireCordovaModule('path');
 
@@ -21,7 +19,7 @@ module.exports = function(context) {
 
       if (data.indexOf(appClass) != -1) {
 
-        var result = data.replace(' android:name="' + appClass + '" ', '');
+        var result = data.replace('android:name="' + appClass + '"', '');
 
         fs.writeFile(manifestFile, result, 'utf8', function (err) {
           if (err) throw new Error('Unable to write into AndroidManifest.xml: ' + err);

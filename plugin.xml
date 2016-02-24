@@ -103,7 +103,7 @@
         <source-file src="src/android/ormlite-core-4.47.jar" target-dir="libs" />
 		
 		<hook type="after_plugin_add" src="src/android/hooks/android_app_name.js" />
-		<hook type="after_plugin_rm" src="src/android/hooks/android_app_name_remove.js" />
+		<hook type="before_plugin_rm" src="src/android/hooks/android_app_name_remove.js" />
 
     </platform>
 	

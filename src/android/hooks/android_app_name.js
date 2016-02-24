@@ -1,7 +1,5 @@
 module.exports = function(context) {
 
-  console.log('Added app name hook');
-
   var fs = context.requireCordovaModule('fs'),
     path = context.requireCordovaModule('path');
 
