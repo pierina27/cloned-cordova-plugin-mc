@@ -4,23 +4,17 @@ function MCPlugin() {
 	console.log("MCPlugin.js: is created");
 }
 
-MCPlugin.prototype.enablePush = function(subscriberKey){
-	exec(function(result){ alert("OK: " + result); },
-		 function(result){ alert("KO: " + result); },
-		 "MCPlugin",'enablePush',[subscriberKey]
-	);
+MCPlugin.prototype.enablePush = function(success, error, subscriberKey){
+	exec(success, error , "MCPlugin",'enablePush',[subscriberKey]);
 }
 //ONLY ANDROID
-MCPlugin.prototype.disablePush = function(){
-	exec(function(result){ alert("OK: " + result); },
-		 function(result){ alert("KO: " + result); },
-		 "MCPlugin",'disablePush',[]
-  );
+MCPlugin.prototype.disablePush = function(success, error){
+	exec(success, error , "MCPlugin",'disablePush',[]);
 }
 
 MCPlugin.prototype.onNotificationReceived = function(payload){
-	if(typeof payload.aps == 'undefined') alert(payload.alert);
-	else alert(payload.aps.alert);
+	console.log("Received push notification")
+	console.log(payload)
 }
 
 MCPlugin.prototype.onNotification = function( callback ){
@@ -28,15 +22,7 @@ MCPlugin.prototype.onNotification = function( callback ){
 }
 
 //ready
-exec(function(result){ },
-	function(result){ },
-	"MCPlugin",'ready',[]
-);
-
-exec(function(result){ alert("OK: " + result); },
-		 function(result){ alert("KO: " + result); },
-		 "MCPlugin",'enablePush',['test@leadclic.com']
-	);
+exec(function(result){ console.log("MCPlugin Ready OK") }, function(result){ console.log("MCPlugin Ready ERROR") }, "MCPlugin",'ready',[]);
 
 var mcPlugin = new MCPlugin();
 module.exports = mcPlugin;

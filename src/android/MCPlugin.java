@@ -53,7 +53,7 @@ public class MCPlugin extends CordovaPlugin {
 			  ETPush.getInstance().disablePush();
 			}
 			
-			callbackContext.success("Bieeeeeeeeeeeeeeeeeeeeeen! " + action);
+			callbackContext.success("Received " + action);
 			
 		}catch(Exception e){
 			Log.d(TAG, "ERROR: onRegistrationEvent" + e.getMessage());
