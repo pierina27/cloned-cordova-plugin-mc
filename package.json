@@ -1,5 +1,5 @@
 {
-    "version": "0.1",
+    "version": "1.0",
     "name": "cordova-plugin-mc",
     "cordova_name": "MarketingCloud Push Plugin",
     "description": "MarketingCloud Push Plugin",
@@ -12,7 +12,7 @@
     ],
     "platforms": [
         "android",
-		"ios",
+        "ios",
     ],
     "engines": [],
     "englishdoc": ""
