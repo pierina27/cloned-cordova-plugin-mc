@@ -1,5 +1,13 @@
 # MarketingCloud Cordova/PhoneGap Push Plugin
-> Alfa Release -  Leadclic Solutions - 2016
+> v1.0 Beta Release -  Leadclic Solutions - 2016
+
+##Release History
+### Version 1.0
+- Android SDK 4.2.0 
+- iOS SDK 4.1.0
+- Available sdk functions: enablePush, disablePush and notification capture.
+
+
 
 ##Installation
 ```Bash
