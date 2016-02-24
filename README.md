@@ -44,7 +44,13 @@ MCPlugin.disablePush();
 ###Capture Push Notifications
 
 ```javascript
+//Android example
 MCPlugin.onNotification(function(payload){
     alert(payload.alert);
+});
+
+//iOS example
+MCPlugin.onNotification(function(payload){
+    alert(payload.aps.alert);
 });
 ```
