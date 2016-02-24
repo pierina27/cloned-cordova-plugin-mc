@@ -1,5 +1,5 @@
 # MarketingCloud Cordova/PhoneGap Push Plugin
-> v1.0 Beta Release -  Leadclic Solutions - 2016
+> v1.0 Beta release -  Leadclic Solutions - 2016
 
 ##Release History
 ### Version 1.0
