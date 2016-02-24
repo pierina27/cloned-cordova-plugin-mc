@@ -19,6 +19,7 @@ MCPlugin.prototype.onNotificationReceived = function(payload){
 
 MCPlugin.prototype.onNotification = function( callback ){
 	MCPlugin.prototype.onNotificationReceived = callback;
+	exec(function(result){ console.log("Notification callback OK") }, function(result){ console.log("Notification callback ERROR") }, "MCPlugin", 'registerNotification',[]);
 }
 
 //ready

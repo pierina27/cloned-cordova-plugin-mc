@@ -36,6 +36,10 @@ public class MCPlugin extends CordovaPlugin {
 		
 		try{
 			if (action.equals("ready")) {
+			 //
+			}
+			
+			if (action.equals("registerNotification")) {
 			 cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                   if(MCPluginApplication.lastPush != null) MCPlugin.sendPushPayload( MCPluginApplication.lastPush );
