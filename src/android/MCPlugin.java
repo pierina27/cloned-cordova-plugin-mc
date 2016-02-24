@@ -1,4 +1,4 @@
-package io.cordova.hellocordova;
+package com.leadclic;
 
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
@@ -17,7 +17,7 @@ import com.exacttarget.etpushsdk.ETPush;
  
 public class MCPlugin extends CordovaPlugin {
  
-	private static final String TAG = "ETSDKWrapper";
+	private static final String TAG = "MCPlugin";
 	
 	public static CordovaWebView gWebView;
 	public static String notificationCallBack = "MCPlugin.onNotificationReceived";
@@ -38,8 +38,8 @@ public class MCPlugin extends CordovaPlugin {
 			if (action.equals("ready")) {
 			 cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
-                  if(MainApplication.lastPush != null) MCPlugin.sendPushPayload( MainApplication.lastPush );
-				  MainApplication.lastPush = null;
+                  if(MCPluginApplication.lastPush != null) MCPlugin.sendPushPayload( MCPluginApplication.lastPush );
+				  MCPluginApplication.lastPush = null;
                 }
               });
 			}

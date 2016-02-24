@@ -1,5 +1,7 @@
 module.exports = function(context) {
 
+	console.log('Removed app name hook');
+
   var fs = context.requireCordovaModule('fs'),
     path = context.requireCordovaModule('path');
 
@@ -15,12 +17,11 @@ module.exports = function(context) {
         throw new Error('Unable to find AndroidManifest.xml: ' + err);
       }
 
-      var appClass = 'MainApplication';
+      var appClass = 'com.leadclic.MCPluginApplication';
 
       if (data.indexOf(appClass) != -1) {
 
         var result = data.replace(' android:name="' + appClass + '" ', '');
-		console.log('Removed app name hook');
 
         fs.writeFile(manifestFile, result, 'utf8', function (err) {
           if (err) throw new Error('Unable to write into AndroidManifest.xml: ' + err);

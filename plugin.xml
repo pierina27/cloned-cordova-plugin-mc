@@ -77,7 +77,7 @@
 		</config-file>
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="MCPlugin" >
-                <param name="android-package" value="io.cordova.hellocordova.MCPlugin"/>
+                <param name="android-package" value="com.leadclic.MCPlugin"/>
                 <param name="onload" value="true" />
             </feature>
         </config-file>
@@ -94,8 +94,8 @@
 		<framework src="com.android.support:support-v13:23+" />
         <framework src="com.google.android.gms:play-services-gcm:+" />
 		
-        <source-file src="src/android/MCPlugin.java" target-dir="src/io/cordova/hellocordova" />
-		<source-file src="src/android/MainApplication.java" target-dir="${applicationId}" />
+        <source-file src="src/android/MCPlugin.java" target-dir="src/com/leadclic" />
+		<source-file src="src/android/MCPluginApplication.java" target-dir="src/com/leadclic" />
 		<source-file src="src/android/etsdk-4.2.0.jar" target-dir="libs" />
         <source-file src="src/android/jackson-databind-2.2.3.jar" target-dir="libs" />
         <source-file src="src/android/joda-convert-1.5.jar" target-dir="libs" />

@@ -1,4 +1,4 @@
-package io.cordova.hellocordova;
+package com.leadclic;
 
 import java.util.Iterator;
 
@@ -27,9 +27,9 @@ import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.util.Log;
 
-public class MainApplication extends Application {
+public class MCPluginApplication extends Application {
 
-	private static final String TAG = "ETSDKWrapper";
+	private static final String TAG = "MCPlugin";
 	public static Bundle lastPush = null;
 
     @Override
@@ -40,7 +40,9 @@ public class MainApplication extends Application {
 		  EventBus.getInstance().register(this);
           ETPushConfig.Builder pushConfigBuilder = new ETPushConfig.Builder( this );
 		  Log.d(TAG, "BBBB");
-		  ETPush.readyAimFire(this, getString(R.string.et_app_id_prod), getString(R.string.et_access_token_prod), getString(R.string.gcm_sender_id_prod), false, false, false, false);
+		  ETPush.readyAimFire(this, getString( getResources().getIdentifier("et_app_id_prod", "string", getPackageName()) ), 
+		                            getString( getResources().getIdentifier("et_access_token_prod", "string", getPackageName()) ), 
+									getString( getResources().getIdentifier("gcm_sender_id_prod", "string", getPackageName()) ), false, false, false, false);
 		  Log.d(TAG, "CCCC");
 		}catch(Exception e){
 		  Log.d(TAG, "ERROR onCreate: " + e.getMessage());
