@@ -3,7 +3,7 @@
 
 ##Release History
 ### Version 1.1
-- Added sdk functions: Attributes, Tags and OpenDirect.
+- Added sdk functions: Attributes, Tags, Custom Keys and OpenDirect.
 
 ### Version 1.0
 - Android SDK 4.2.0 
@@ -76,12 +76,12 @@ A webView is opened with the Specified URL
 //Android example
 MCPlugin.onNotification(function(payload){
     alert(payload.alert);
-    alert(payload.customKey);//CustomKey
+    alert(payload.customKey);//Retrieve customKey
 });
 
 //iOS example
 MCPlugin.onNotification(function(payload){
     alert(payload.aps.alert);
-    alert(payload.aps.customKey);//CustomKey
+    alert(payload.aps.customKey);//Retrieve customKey
 });
 ```
