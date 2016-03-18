@@ -41,6 +41,7 @@ cordova platform add ios@3.9.2
 
 ```javascript
 MCPlugin.setSubcriberKey('subscriberkey@example.com');
+//If this functions is not called, device id is used as default subscriber key.
 ```
 
 ###Add Attribute
