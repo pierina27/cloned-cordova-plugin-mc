@@ -37,41 +37,41 @@ cordova platform add ios@3.9.2
 
 ##Usage
 
-###Set Subscriber Key
+####Set Subscriber Key
 
 ```javascript
 //If this function is not called, device id is used as default subscriber key.
 MCPlugin.setSubcriberKey('subscriberkey@example.com');
 ```
 
-###Add Attribute
+####Add Attribute
 
 ```javascript
 MCPlugin.addAttribute('key', 'value');
 ```
 
-###Remove Attribute
+####Remove Attribute
 
 ```javascript
 MCPlugin.removeAttribute('key');
 ```
 
-###Add Tag
+####Add Tag
 
 ```javascript
 MCPlugin.addTag('value');
 ```
 
-###Remove Tag
+####Remove Tag
 
 ```javascript
 MCPlugin.removeTag('value');
 ```
 
-###OpenDirect
+####OpenDirect
 A webView is opened with the Specified URL
 
-###Capture Push Notifications
+####Capture Push Notifications
 
 ```javascript
 //Android example
