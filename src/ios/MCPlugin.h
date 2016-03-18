@@ -8,8 +8,7 @@
 
 + (MCPlugin *) etPlugin;
 - (void)ready:(CDVInvokedUrlCommand*)command;
-- (void)enablePush:(CDVInvokedUrlCommand*)command;
-- (void)disablePush:(CDVInvokedUrlCommand*)command;
+- (void)setSubscriberKey:(CDVInvokedUrlCommand*)command;
 - (void)registerNotification:(CDVInvokedUrlCommand*)command;
 - (void)notifyOfMessage:(NSData*) payload;
 

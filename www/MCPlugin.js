@@ -4,12 +4,24 @@ function MCPlugin() {
 	console.log("MCPlugin.js: is created");
 }
 
-MCPlugin.prototype.enablePush = function(success, error, subscriberKey){
-	exec(success, error , "MCPlugin",'enablePush',[subscriberKey]);
+MCPlugin.prototype.setSubscriberKey = function(success, error, subscriberKey){
+	exec(success, error , "MCPlugin",'setSubscriberKey',[subscriberKey]);
 }
-//ONLY ANDROID
-MCPlugin.prototype.disablePush = function(success, error){
-	exec(success, error , "MCPlugin",'disablePush',[]);
+
+MCPlugin.prototype.addAttribute = function(success, error, key, value){
+	exec(success, error , "MCPlugin",'addAttribute',[key, value]);
+}
+
+MCPlugin.prototype.removeAttribute = function(success, error, key){
+	exec(success, error , "MCPlugin",'removeAttribute',[key]);
+}
+
+MCPlugin.prototype.addTag = function(success, error, value){
+	exec(success, error , "MCPlugin",'addTag',[value]);
+}
+
+MCPlugin.prototype.removeTag = function(success, error, value){
+	exec(success, error , "MCPlugin",'removeTag',[value]);
 }
 
 MCPlugin.prototype.onNotificationReceived = function(payload){

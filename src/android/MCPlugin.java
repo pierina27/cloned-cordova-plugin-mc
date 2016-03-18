@@ -36,31 +36,48 @@ public class MCPlugin extends CordovaPlugin {
 		
 		try{
 			if (action.equals("ready")) {
-			 //
+				//It seems that the SDK enables push automatically
+				//ETPush.getInstance().enablePush();
 			}
 			
 			if (action.equals("registerNotification")) {
-			 cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                  if(MCPluginApplication.lastPush != null) MCPlugin.sendPushPayload( MCPluginApplication.lastPush );
-				  MCPluginApplication.lastPush = null;
-                }
-              });
+				cordova.getActivity().runOnUiThread(new Runnable() {
+					public void run() {
+						if(MCPluginApplication.lastPush != null) MCPlugin.sendPushPayload( MCPluginApplication.lastPush );
+						MCPluginApplication.lastPush = null;
+					}
+				});
 			}
 		
-			if (action.equals("enablePush")) {
-			  if( args.getString(0) != null ) ETPush.getInstance().setSubscriberKey( args.getString(0) );
-			  ETPush.getInstance().enablePush();
+			if (action.equals("setSubscriberKey")) {
+				ETPush.getInstance().setSubscriberKey( args.getString(0) );
 			}
-		
-			if (action.equals("disablePush")) {
-			  ETPush.getInstance().disablePush();
+			
+			  ////////////////
+			 // ATTRIBUTES //
+			////////////////
+			if (action.equals("addAttribute")) {
+				ETPush.getInstance().addAttribute(args.getString(0), args.getString(1));
+			}
+			
+			if (action.equals("removeAttribute")) {
+				ETPush.getInstance().removeAttribute(args.getString(0));
+			}
+			  //////////
+			 // TAGS //
+			///////////
+			if (action.equals("addTag")) {
+				ETPush.getInstance().addTag(args.getString(0));
+			}
+			
+			if (action.equals("removeTag")) {
+				ETPush.getInstance().removeTag(args.getString(0));
 			}
 			
 			callbackContext.success("Received " + action);
 			
 		}catch(Exception e){
-			Log.d(TAG, "ERROR: onRegistrationEvent" + e.getMessage());
+			Log.d(TAG, "ERROR: onPluginAction" + e.getMessage());
 		}
 		
 		//cordova.getThreadPool().execute(new Runnable() {

@@ -31,7 +31,7 @@ static MCPlugin *etPluginInstance;
     
 }
 
-- (void) enablePush:(CDVInvokedUrlCommand *)command
+- (void) setSubscriberKey:(CDVInvokedUrlCommand *)command
 {
     NSString* subKey = [command.arguments objectAtIndex:0];
     NSLog(@"setting sub key %@", subKey);
@@ -40,18 +40,6 @@ static MCPlugin *etPluginInstance;
         if(subKey != nil)[[ETPush pushManager] setSubscriberKey:subKey];
         CDVPluginResult* pluginResult = nil;
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:subKey];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-    }];
-    
-}
-
-/* Android only methods here to keep errors from clogging the log */
-- (void) disablePush:(CDVInvokedUrlCommand *)command
-{
-    [self.commandDelegate runInBackground:^{
-        
-        CDVPluginResult* pluginResult = nil;
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
     
