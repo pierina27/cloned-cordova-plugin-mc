@@ -69,7 +69,9 @@ MCPlugin.removeTag('value');
 ```
 
 ####OpenDirect
-A webView is opened with the Specified URL
+```
+A webView is opened with the specified URL
+```
 
 ####Capture Push Notifications
 
