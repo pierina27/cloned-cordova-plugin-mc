@@ -1,13 +1,14 @@
 # MarketingCloud Cordova/PhoneGap Push Plugin
-> v1.0 Beta release -  Leadclic Solutions - 2016
+> v1.1 Beta release -  Leadclic Solutions - 2016
 
 ##Release History
+### Version 1.1
+- Added sdk functions: Attributes, Tags and OpenDirect.
+
 ### Version 1.0
 - Android SDK 4.2.0 
 - iOS SDK 4.1.0
-- Available sdk functions: enablePush, disablePush and notification capture.
-
-
+- Available sdk functions: setSubscriberKey and notification capture.
 
 ##Installation
 ```Bash
@@ -36,17 +37,41 @@ cordova platform add ios@3.9.2
 
 ##Usage
 
-###Enable Push Notifications
+###Set Subscriber Key
 
 ```javascript
-MCPlugin.enablePush(); //Device Id as identifier
-MCPlugin.enablePush('subscriber@key.com'); //Custom identifier
+MCPlugin.setSubcriberKey('subscriberkey@example.com');
 ```
 
-###Disable Push Notifications (only Android)
+###Add Attribute
 
 ```javascript
-MCPlugin.disablePush();
+MCPlugin.addAttribute('key', 'value');
+```
+
+###Remove Attribute
+
+```javascript
+MCPlugin.removeAttribute('key');
+```
+
+###Add Tag
+
+```javascript
+MCPlugin.addTag('value');
+```
+
+###Remove Tag
+
+```javascript
+MCPlugin.removeTag('value');
+```
+
+###OpenDirect
+A webView is opened with the Specified URL
+
+```javascript
+MCPlugin.removeTag('value');
 ```
 
 ###Capture Push Notifications
@@ -55,10 +80,12 @@ MCPlugin.disablePush();
 //Android example
 MCPlugin.onNotification(function(payload){
     alert(payload.alert);
+    alert(payload.customKey);//CustomKey
 });
 
 //iOS example
 MCPlugin.onNotification(function(payload){
     alert(payload.aps.alert);
+    alert(payload.aps.customKey);//CustomKey
 });
 ```
