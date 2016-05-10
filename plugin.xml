@@ -34,9 +34,10 @@
 	</info>
 	
 	<js-module src="www/MCPlugin.js" name="MCPlugin">
-			<clobbers target="MCPlugin" />
-        </js-module>
+		<clobbers target="MCPlugin" />
+    </js-module>
 	
+	<!-- Installation parameters -->	
 	<preference name="PRODAPPID" />
 	<preference name="PRODACCESSTOKEN" />
 	<preference name="PRODGCMSENDERID" />
@@ -44,7 +45,8 @@
     <engines>
       <engine name="cordova-android" version=">=4.0.0" />
     </engines>
-
+	
+	<!-- ANDROID CONFIGURATION -->
     <platform name="android">
 		<config-file target="AndroidManifest.xml" parent="/manifest">
 			<uses-permission android:name="android.permission.INTERNET" />
@@ -103,7 +105,7 @@
 
     </platform>
 	
-	
+	<!-- IOS CONFIGURATION -->
 	<platform name="ios">
         <config-file target="*-Info.plist" parent="ETAppSettings">
                 <dict>
@@ -153,7 +155,5 @@
         <framework src="CoreLocation.framework/" />
 		<framework src="Security.framework/" />
     </platform>
-	
-	
 	
 </plugin>

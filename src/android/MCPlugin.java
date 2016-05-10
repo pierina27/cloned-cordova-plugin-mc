@@ -39,8 +39,8 @@ public class MCPlugin extends CordovaPlugin {
 				//It seems that the SDK enables push automatically
 				//ETPush.getInstance().enablePush();
 			}
-			
-			if (action.equals("registerNotification")) {
+			// NOTIFICATION CALLBAACK REGISTER //
+			else if (action.equals("registerNotification")) {
 				cordova.getActivity().runOnUiThread(new Runnable() {
 					public void run() {
 						if(MCPluginApplication.lastPush != null) MCPlugin.sendPushPayload( MCPluginApplication.lastPush );
@@ -48,36 +48,34 @@ public class MCPlugin extends CordovaPlugin {
 					}
 				});
 			}
-		
-			if (action.equals("setSubscriberKey")) {
+			// SUBSCRIBER KEY //
+			else if (action.equals("setSubscriberKey")) {
 				ETPush.getInstance().setSubscriberKey( args.getString(0) );
 			}
-			
-			  ////////////////
-			 // ATTRIBUTES //
-			////////////////
-			if (action.equals("addAttribute")) {
+			// ATTRIBUTES //
+			else if (action.equals("addAttribute")) {
 				ETPush.getInstance().addAttribute(args.getString(0), args.getString(1));
 			}
-			
-			if (action.equals("removeAttribute")) {
+			else if (action.equals("removeAttribute")) {
 				ETPush.getInstance().removeAttribute(args.getString(0));
 			}
-			  //////////
-			 // TAGS //
-			///////////
-			if (action.equals("addTag")) {
+			// TAGS //
+			else if (action.equals("addTag")) {
 				ETPush.getInstance().addTag(args.getString(0));
 			}
-			
-			if (action.equals("removeTag")) {
+			else if (action.equals("removeTag")) {
 				ETPush.getInstance().removeTag(args.getString(0));
 			}
-			
+			// METHOD NOT FOUND //
+			else{
+				callbackContext.error('Method not found');
+				return false;
+			}
 			callbackContext.success("Received " + action);
-			
+			return true;
 		}catch(Exception e){
 			Log.d(TAG, "ERROR: onPluginAction" + e.getMessage());
+			callbackContext.error(e.getMessage());
 		}
 		
 		//cordova.getThreadPool().execute(new Runnable() {
@@ -91,8 +89,6 @@ public class MCPlugin extends CordovaPlugin {
         //      //
         //    }
         //});
-		 
-		return true;
 	}
 	
 	public static void sendPushPayload(Bundle payload) {
