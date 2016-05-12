@@ -68,7 +68,7 @@ public class MCPlugin extends CordovaPlugin {
 			}
 			// METHOD NOT FOUND //
 			else{
-				callbackContext.error('Method not found');
+				callbackContext.error("Method not found");
 				return false;
 			}
 			callbackContext.success("Received " + action);
