@@ -71,11 +71,10 @@ public class MCPlugin extends CordovaPlugin {
 				callbackContext.error("Method not found");
 				return false;
 			}
-			callbackContext.success("Received " + action);
-			return true;
 		}catch(Exception e){
 			Log.d(TAG, "ERROR: onPluginAction" + e.getMessage());
 			callbackContext.error(e.getMessage());
+			return false;
 		}
 		
 		//cordova.getThreadPool().execute(new Runnable() {
@@ -89,6 +88,8 @@ public class MCPlugin extends CordovaPlugin {
         //      //
         //    }
         //});
+		callbackContext.success("Received " + action);
+		return true;
 	}
 	
 	public static void sendPushPayload(Bundle payload) {
