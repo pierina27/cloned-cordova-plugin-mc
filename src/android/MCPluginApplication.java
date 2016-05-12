@@ -40,6 +40,7 @@ public class MCPluginApplication extends Application {
 		  EventBus.getInstance().register(this);
           ETPushConfig.Builder pushConfigBuilder = new ETPushConfig.Builder( this );
 		  Log.d(TAG, "BBBB");
+		  ETPush.setLogLevel(Log.DEBUG);
 		  ETPush.readyAimFire(this, getString( getResources().getIdentifier("et_app_id_prod", "string", getPackageName()) ), 
 		                            getString( getResources().getIdentifier("et_access_token_prod", "string", getPackageName()) ), 
 									getString( getResources().getIdentifier("gcm_sender_id_prod", "string", getPackageName()) ), false, false, false, false);
