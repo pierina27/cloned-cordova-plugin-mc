@@ -30,7 +30,7 @@ You will need to ensure that you have installed the following items through the 
 - Google Play Services version 27 or greater
 - Google Repository version 22 or greater
 
-For Android >5.0 status bar icon, you must to add a transparent with solid color icon with name 'mc_plugin_stat_icon.png' in the 'res' folder, in the same way you add the application icons.
+For Android >5.0 status bar icon, you must to include transparent solid color icon with name 'mc_plugin_stat_icon.png' in the 'res' folder, in the same way you add the application icons.
 If you do not set this resource, then the SDK will use the default icon for your app which may not meet the standards for Android 5.0.
 
 #### Cordova-iOS 4+ known issue
