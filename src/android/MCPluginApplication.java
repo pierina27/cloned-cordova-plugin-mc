@@ -1,4 +1,4 @@
-package com.leadclic;
+package com.leadclic.test;
 
 import java.util.Iterator;
 

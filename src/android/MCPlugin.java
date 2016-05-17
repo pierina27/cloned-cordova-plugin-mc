@@ -1,4 +1,4 @@
-package com.leadclic;
+package com.leadclic.test;
 
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
