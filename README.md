@@ -68,6 +68,7 @@ MCPlugin.removeTag('value');
 ```
 The OpenDirect customized push message contains a URL to open in a web view.
 By default, the SDK will open the URL in a web view.
+The URL must include the protocol (http:// or https://).
 ```
 
 ####Capture Push Notifications
