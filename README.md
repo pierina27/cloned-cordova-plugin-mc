@@ -66,7 +66,7 @@ MCPlugin.removeTag('value');
 
 ####OpenDirect
 ```
-A webView is opened with the specified URL
+The OpenDirect customized push message contains a URL to open in a web view. By default, the SDK will open the URL in a web view.
 ```
 
 ####Capture Push Notifications
