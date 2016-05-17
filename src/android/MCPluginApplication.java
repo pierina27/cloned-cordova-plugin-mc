@@ -1,4 +1,4 @@
-package com.leadclic.test;
+package com.leadclic;
 
 import java.util.Iterator;
 
@@ -56,7 +56,7 @@ public class MCPluginApplication extends Application {
 		try {
 			etPush = event.getEtPush();
 			etPush.addTag("2.1.0");
-			etPush.setNotificationResourceId(R.drawable.ic_stat_sdk_explorer);
+			etPush.setNotificationResourceId( getString( getResources().getIdentifier("ic_stat_sdk_explorer", "drawable", getPackageName()) ) );
 		} catch (ETException e) {
 			Log.d(TAG, "ERROR onReadyAimFireInitCompletedEvent: " + e.getMessage());
 		}
