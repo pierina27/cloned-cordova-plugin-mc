@@ -56,8 +56,8 @@ public class MCPluginApplication extends Application {
 		try {
 			etPush = event.getEtPush();
 			etPush.addTag("2.1.0");
-			Log.d(TAG, "Setting Android Notification Icon ID: " + getResources().getIdentifier("ic_stat_sdk_explorer", "drawable", getPackageName()));
-			etPush.setNotificationResourceId( getResources().getIdentifier("ic_stat_sdk_explorer", "drawable", getPackageName()) );
+			Log.d(TAG, "Setting Android Notification Icon ID: " + getResources().getIdentifier("mc_plugin_stat_icon", "drawable", getPackageName()));
+			etPush.setNotificationResourceId( getResources().getIdentifier("mc_plugin_stat_icon", "drawable", getPackageName()) );
 		} catch (ETException e) {
 			Log.d(TAG, "ERROR onReadyAimFireInitCompletedEvent: " + e.getMessage());
 		}
