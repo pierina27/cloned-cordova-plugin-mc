@@ -1,7 +1,10 @@
 # MarketingCloud Cordova/PhoneGap Push Plugin
-> v1.1 Beta release -  Leadclic Solutions - 2016
+> v1.2 Beta release -  Leadclic Solutions - 2016
 
 ##Release History
+#### Version 1.2
+- Added Android >5.0 status bar notification icon resource
+
 #### Version 1.1
 - Added sdk functions: Attributes, Tags, Custom Keys and OpenDirect.
 
@@ -27,6 +30,8 @@ You will need to ensure that you have installed the following items through the 
 - Google Play Services version 27 or greater
 - Google Repository version 22 or greater
 
+For Android >5.0 status bar icon, you must to add a transparent with solid color icon with name 'mc_plugin_stat_icon.png' in the 'res' folder, in the same way you add the application icons.
+
 #### Cordova-iOS 4+ known issue
 
 - Install previous cordova version
@@ -44,27 +49,17 @@ cordova platform add ios@3.9.2
 MCPlugin.setSubcriberKey('subscriberkey@example.com');
 ```
 
-####Add Attribute
+####Add/Remove Attribute
 
 ```javascript
 MCPlugin.addAttribute('key', 'value');
-```
-
-####Remove Attribute
-
-```javascript
 MCPlugin.removeAttribute('key');
 ```
 
-####Add Tag
+####Add/Remove Tag
 
 ```javascript
 MCPlugin.addTag('value');
-```
-
-####Remove Tag
-
-```javascript
 MCPlugin.removeTag('value');
 ```
 
