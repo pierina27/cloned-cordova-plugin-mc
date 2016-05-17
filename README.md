@@ -3,7 +3,7 @@
 
 ##Release History
 #### Version 1.2
-- Added Android >5.0 status bar notification icon resource (See Android compilation details).
+- Added Android >5.0 status bar notification icon resource. (See Android compilation details)
 
 #### Version 1.1
 - Added sdk functions: Attributes, Tags, Custom Keys and OpenDirect.
