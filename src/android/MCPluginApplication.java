@@ -55,7 +55,8 @@ public class MCPluginApplication extends Application {
 		ETPush etPush = null;
 		try {
 			etPush = event.getEtPush();
-			etPush.addTag("2.0.0");
+			etPush.addTag("2.1.0");
+			etPush.pushManager.setNotificationResourceId(R.drawable.ic_stat_sdk_explorer);
 		} catch (ETException e) {
 			Log.d(TAG, "ERROR onReadyAimFireInitCompletedEvent: " + e.getMessage());
 		}

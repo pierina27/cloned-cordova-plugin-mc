@@ -72,7 +72,7 @@ public class MCPlugin extends CordovaPlugin {
 				return false;
 			}
 		}catch(Exception e){
-			Log.d(TAG, "ERROR: onPluginAction" + e.getMessage());
+			Log.d(TAG, "ERROR: onPluginAction: " + e.getMessage());
 			callbackContext.error(e.getMessage());
 			return false;
 		}
