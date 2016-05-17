@@ -66,7 +66,8 @@ MCPlugin.removeTag('value');
 
 ####OpenDirect
 ```
-The OpenDirect customized push message contains a URL to open in a web view. By default, the SDK will open the URL in a web view.
+The OpenDirect customized push message contains a URL to open in a web view.
+By default, the SDK will open the URL in a web view.
 ```
 
 ####Capture Push Notifications
