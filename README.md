@@ -1,7 +1,11 @@
 # MarketingCloud Cordova/PhoneGap Push Plugin
-> v1.2 Beta release -  Leadclic Solutions - 2016
+> v2.0 Beta release -  Leadclic Solutions - 2016
 
 ##Release History
+#### Version 2.0
+- Android SDK 4.3.2
+- Added Geofence capabilities (testing status)
+
 #### Version 1.2
 - Added Android >5.0 status bar notification icon resource. (See Android compilation details)
 
@@ -69,6 +73,17 @@ MCPlugin.removeTag('value');
 The OpenDirect customized push message contains a URL to open in a web view.
 By default, the SDK will open the URL in a web view.
 The URL must include the protocol (http:// or https://).
+```
+
+####Geofence
+
+```javascript
+MCPlugin.startWatchingLocation();
+MCPlugin.stopWatchingLocation();
+MCPlugin.isWatchingLocation(function(result){
+	console.log(result)
+	//result = "true" if is watching location
+});
 ```
 
 ####Capture Push Notifications
