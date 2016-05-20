@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.exacttarget.etpushsdk.ETPush;
+import com.exacttarget.etpushsdk.ETLocationManager;
  
 public class MCPlugin extends CordovaPlugin {
  
@@ -21,6 +22,9 @@ public class MCPlugin extends CordovaPlugin {
 	
 	public static CordovaWebView gWebView;
 	public static String notificationCallBack = "MCPlugin.onNotificationReceived";
+	
+	public final int PERMISSION_LOCATION = 1;
+	public static final String ACCESS_LOCATION = android.Manifest.permission.ACCESS_FINE_LOCATION;
 	 
 	public MCPlugin() {}
 	
@@ -35,9 +39,9 @@ public class MCPlugin extends CordovaPlugin {
 		Log.d(TAG,"MCPlugin RECEIVED: "+ action);
 		
 		try{
+			// READY //
 			if (action.equals("ready")) {
-				//It seems that the SDK enables push automatically
-				//ETPush.getInstance().enablePush();
+				ETPush.getInstance().enablePush();
 			}
 			// NOTIFICATION CALLBAACK REGISTER //
 			else if (action.equals("registerNotification")) {
@@ -66,6 +70,28 @@ public class MCPlugin extends CordovaPlugin {
 			else if (action.equals("removeTag")) {
 				ETPush.getInstance().removeTag(args.getString(0));
 			}
+			// MONITOR LOCATION //
+			else if (action.equals("startWatchingLocation")) {
+				if (android.os.Build.VERSION.SDK_INT<android.os.Build.VERSION_CODES.M || cordova.hasPermission(ACCESS_LOCATION)){
+					ETLocationManager.getInstance().startWatchingLocation();
+				}else{
+					cordova.requestPermission(this, PERMISSION_LOCATION, ACCESS_LOCATION);
+				}
+			}
+			else if (action.equals("stopWatchingLocation")) {
+				ETLocationManager.getInstance().stopWatchingLocation();
+			}
+			else if (action.equals("isWatchingLocation")) {
+				callbackContext.success( ""+ETLocationManager.getInstance().isWatchingLocation() );
+				return true;
+			}
+			// SDK STATE //
+			else if (action.equals("getSDKState")) {
+				String SDKState = ETPush.getInstance().getSDKState();
+				Log.d(TAG, "SDKState: " + SDKState);
+				callbackContext.success( SDKState );
+				return true;
+			}
 			// METHOD NOT FOUND //
 			else{
 				callbackContext.error("Method not found");
@@ -90,6 +116,23 @@ public class MCPlugin extends CordovaPlugin {
         //});
 		callbackContext.success("Received " + action);
 		return true;
+	}
+	
+	public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) throws JSONException {
+		switch(requestCode) {
+			case PERMISSION_LOCATION:
+				cordova.getThreadPool().execute(new Runnable() {
+				public void run() {
+					   try {
+						   ETLocationManager.locationManager().startWatchingLocation();
+						   /*ETLocationManager.locationManager().startWatchingProximity();*/
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				break;
+		}
 	}
 	
 	public static void sendPushPayload(Bundle payload) {

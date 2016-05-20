@@ -49,33 +49,8 @@
 	<!-- ANDROID CONFIGURATION -->
     <platform name="android">
 		<config-file target="AndroidManifest.xml" parent="/manifest">
-			<uses-permission android:name="android.permission.INTERNET" />
-			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-			<permission android:name="${applicationId}.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-			<uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
-			<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-			<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-			<uses-permission android:name="android.permission.WAKE_LOCK" />
-		</config-file>
-		<config-file target="AndroidManifest.xml" parent="/manifest/application">
-			<receiver android:name="com.exacttarget.etpushsdk.ETPushReceiver" android:permission="com.google.android.c2dm.permission.SEND">
-				<intent-filter>
-					<action android:name="${applicationId}.MESSAGE_OPENED" />
-					<action android:name="com.exacttarget.etpushsdk.SEND_REGISTRATION" />
-					<action android:name="com.google.android.c2dm.intent.RECEIVE" />
-					<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-					<action android:name="android.intent.action.ACTION_SHUTDOWN" />
-					<action android:name="android.intent.action.AIRPLANE_MODE" />
-					<category android:name="${applicationId}" />
-				</intent-filter>
-				<intent-filter>
-					<action android:name="android.intent.action.PACKAGE_REPLACED" />
-					<data android:scheme="package" />
-				</intent-filter>
-			</receiver>
-			<service android:enabled="true" android:name="com.exacttarget.etpushsdk.ETPushService" />
-			<activity android:label="Landing Page" android:name="com.exacttarget.etpushsdk.ETLandingPagePresenter" />
+			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+			<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 		</config-file>
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="MCPlugin" >
@@ -91,14 +66,13 @@
 			<string name="et_app_id_prod">$PRODAPPID</string>
 			<string name="et_access_token_prod">$PRODACCESSTOKEN</string>
 			<string name="gcm_sender_id_prod">$PRODGCMSENDERID</string>
+			<!--<bool name="mc_enablelocation">$ENABLELOCATION</bool>-->
  		</config-file>
 		
-		<framework src="com.android.support:support-v13:23+" />
-        <framework src="com.google.android.gms:play-services-gcm:+" />
+		<framework src="src/android/MCPlugin.gradle" custom="true" type="gradleReference"/>
 		
         <source-file src="src/android/MCPlugin.java" target-dir="src/com/leadclic" />
 		<source-file src="src/android/MCPluginApplication.java" target-dir="src/com/leadclic" />
-		<source-file src="src/android/etsdk-4.2.0.jar" target-dir="libs" />
 		
 		<hook type="after_plugin_add" src="src/android/hooks/android_app_name.js" />
 		<hook type="before_plugin_rm" src="src/android/hooks/android_app_name_remove.js" />
