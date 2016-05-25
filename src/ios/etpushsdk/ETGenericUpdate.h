@@ -2,11 +2,15 @@
 //  GenericUpdate.h
 //  JB4A-SDK-iOS
 //
-//  Created by Eddie Roger on 7/18/13.
-//  Copyright © 2015 Salesforce Marketing Cloud. All rights reserved.
+//  JB4A iOS SDK GitHub Repository
+//  https://salesforce-marketingcloud.github.io/JB4A-SDK-iOS/
+
+//  Copyright © 2016 Salesforce Marketing Cloud. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  This enumeration defines what HTTP method should be used in sending the data. These are standard HTTP methods.
@@ -28,8 +32,8 @@ typedef NS_ENUM(NSInteger, GenericUpdateSendMethod)
  */
 @protocol ETGenericUpdateObjectProtocol <NSObject>
 
-+(instancetype)alloc;
--(instancetype)initFromDictionary:(NSDictionary *)dict;
++(nullable instancetype)alloc;
+-(nullable instancetype)initFromDictionary:(NSDictionary *)dict;
 
 +(NSString *)remoteRoutePath;
 -(NSString *)remoteRoutePath;
@@ -49,6 +53,11 @@ typedef NS_ENUM(NSInteger, GenericUpdateSendMethod)
 
 static NSString * const ETRequestBaseURL = @"https://consumer.exacttargetapis.com";
 
+/*!
+ @class ETGenericUpdate
+ 
+ Inheritable class used for many other classes and allows usage for several core overload methods.
+ */
 @interface ETGenericUpdate : NSObject
 
 @property (nonatomic) int tag; // The property that started this whole ordeal.
@@ -71,17 +80,17 @@ static NSString * const ETRequestBaseURL = @"https://consumer.exacttargetapis.co
 /**
  The route to which the call should be made. This will be appended to the BaseURL in ETPhoneHome, and should lead with a slash.
  */
--(NSString *)remoteRoutePath;
+-(nullable NSString *)remoteRoutePath;
 
 /**
  Serializes the payload for POSTing. 
  */
--(NSString *)jsonPayloadAsString;
+-(nullable NSString *)jsonPayloadAsString;
 
 /**
  Serializes as a dictionary for bulk uploading.
  */
--(NSDictionary *)jsonPayloadAsDictionary;
+-(nullable NSDictionary *)jsonPayloadAsDictionary;
 
 /**
  Called by ETPhoneHome after the ETURLConnection is finished. This should handle doing anything that needs to be done to the payload after it's fully received (like, start monitoring for geofences.
@@ -132,10 +141,10 @@ static NSString * const ETRequestBaseURL = @"https://consumer.exacttargetapis.co
 /**
  Returns the arguments that should be inserted into the database to match the query specified in the previous method. As such, the number should equal the number of question marks used in the previous method.
  
- Also, they need to all be NSObjects, and not primitives or non-object variants of NULL. So, use an NSNumber wrapper for numbers and bools, and [NSNull null] for nils. Please.
+ Also, they need to all be NSObjects, and not primitives or non-object variants of NULL. So, use an NSNumber wrapper for numbers and bools, and [ NSNull null] for nils. Please.
  */
--(NSArray *)insertQueryArguments;
--(NSArray *)updateQueryArguments;
+-(nullable NSArray *)insertQueryArguments;
+-(nullable NSArray *)updateQueryArguments;
 
 
 /**
@@ -143,8 +152,8 @@ static NSString * const ETRequestBaseURL = @"https://consumer.exacttargetapis.co
  
  Also, if you're new to SQLite and binding, the number of question marks in this statement should be equal to the number of arguments returned in the next method.
  */
--(NSString *)insertQuerySyntax;
--(NSString *)updateQuerySyntax;
+-(nullable NSString *)insertQuerySyntax;
+-(nullable NSString *)updateQuerySyntax;
 
 /*
  An exception already. This method should *not* be called from the children objects. Just pretend you can't see it.
@@ -162,13 +171,14 @@ static NSString * const ETRequestBaseURL = @"https://consumer.exacttargetapis.co
  
  These methods apply to the generic object in question.
  */
-+(NSDateFormatter *)formatterOfCorrectFormat; // This one should *not* be implemented by children
-+(NSDateFormatter *)alternativeFormatterOfCorrectFormat; // Well, this one should *really* never be used
-+(NSDate *)dateFromString:(NSString *)dateAsString;
-+(NSString *)stringFromDate:(NSDate *)date;
++(nullable NSDateFormatter *)formatterOfCorrectFormat; // This one should *not* be implemented by children
++(nullable NSDateFormatter *)alternativeFormatterOfCorrectFormat; // Well, this one should *really* never be used
++(nullable NSDate *)dateFromString:(NSString *)dateAsString;
++(nullable NSString *)stringFromDate:(NSDate *)date;
 
-+(NSNumberFormatter *)numberFormatterOfCorrectFormatForDouble;
++(nullable NSNumberFormatter *)numberFormatterOfCorrectFormatForDouble;
 
 
 
 @end
+NS_ASSUME_NONNULL_END

@@ -1,4 +1,4 @@
-package com.leadclic;
+package com.leadclic.test.plugin;
 
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
@@ -41,9 +41,9 @@ public class MCPlugin extends CordovaPlugin {
 		try{
 			// READY //
 			if (action.equals("ready")) {
-				ETPush.getInstance().enablePush();
+				//ETPush.getInstance().enablePush();
 			}
-			// NOTIFICATION CALLBAACK REGISTER //
+			// NOTIFICATION CALLBACK REGISTER //
 			else if (action.equals("registerNotification")) {
 				cordova.getActivity().runOnUiThread(new Runnable() {
 					public void run() {
@@ -55,6 +55,10 @@ public class MCPlugin extends CordovaPlugin {
 			// SUBSCRIBER KEY //
 			else if (action.equals("setSubscriberKey")) {
 				ETPush.getInstance().setSubscriberKey( args.getString(0) );
+			}
+			else if (action.equals("getSubscriberKey")) {
+				callbackContext.success( ETPush.getInstance().getSubscriberKey() );
+				return true;
 			}
 			// ATTRIBUTES //
 			else if (action.equals("addAttribute")) {
@@ -72,14 +76,32 @@ public class MCPlugin extends CordovaPlugin {
 			}
 			// MONITOR LOCATION //
 			else if (action.equals("startWatchingLocation")) {
-				if (android.os.Build.VERSION.SDK_INT<android.os.Build.VERSION_CODES.M || cordova.hasPermission(ACCESS_LOCATION)){
-					ETLocationManager.getInstance().startWatchingLocation();
+				if(android.os.Build.VERSION.SDK_INT<android.os.Build.VERSION_CODES.M || cordova.hasPermission(ACCESS_LOCATION)){
+					cordova.getThreadPool().execute(new Runnable() {
+						public void run() {
+							try{
+								ETLocationManager.locationManager().startWatchingLocation();
+							}catch(Exception e){
+								Log.d(TAG, "ERROR: onStartWatchingLocation: " + e.getMessage());
+								callbackContext.error(e.getMessage());
+							}
+						}
+					});
 				}else{
 					cordova.requestPermission(this, PERMISSION_LOCATION, ACCESS_LOCATION);
 				}
 			}
 			else if (action.equals("stopWatchingLocation")) {
-				ETLocationManager.getInstance().stopWatchingLocation();
+				cordova.getThreadPool().execute(new Runnable() {
+					public void run() {
+						try{
+							ETLocationManager.locationManager().stopWatchingLocation();
+						}catch(Exception e){
+							Log.d(TAG, "ERROR: onStopWatchingLocation: " + e.getMessage());
+							callbackContext.error(e.getMessage());
+						}
+					}
+				});
 			}
 			else if (action.equals("isWatchingLocation")) {
 				callbackContext.success( ""+ETLocationManager.getInstance().isWatchingLocation() );
@@ -122,10 +144,9 @@ public class MCPlugin extends CordovaPlugin {
 		switch(requestCode) {
 			case PERMISSION_LOCATION:
 				cordova.getThreadPool().execute(new Runnable() {
-				public void run() {
+					public void run() {
 					   try {
 						   ETLocationManager.locationManager().startWatchingLocation();
-						   /*ETLocationManager.locationManager().startWatchingProximity();*/
 						} catch (Exception e) {
 							e.printStackTrace();
 						}

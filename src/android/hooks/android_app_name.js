@@ -15,7 +15,7 @@ module.exports = function(context) {
         throw new Error('Unable to find AndroidManifest.xml: ' + err);
       }
 
-      var appClass = 'com.leadclic.MCPluginApplication';
+      var appClass = 'com.leadclic.test.plugin.MCPluginApplication';
 
       if (data.indexOf(appClass) == -1) {
 

@@ -54,7 +54,7 @@
 		</config-file>
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="MCPlugin" >
-                <param name="android-package" value="com.leadclic.MCPlugin"/>
+                <param name="android-package" value="com.leadclic.test.plugin.MCPlugin"/>
                 <param name="onload" value="true" />
             </feature>
         </config-file>
@@ -71,8 +71,8 @@
 		
 		<framework src="src/android/MCPlugin.gradle" custom="true" type="gradleReference"/>
 		
-        <source-file src="src/android/MCPlugin.java" target-dir="src/com/leadclic" />
-		<source-file src="src/android/MCPluginApplication.java" target-dir="src/com/leadclic" />
+        <source-file src="src/android/MCPlugin.java" target-dir="src/com/leadclic/test/plugin" />
+		<source-file src="src/android/MCPluginApplication.java" target-dir="src/com/leadclic/test/plugin" />
 		
 		<hook type="after_plugin_add" src="src/android/hooks/android_app_name.js" />
 		<hook type="before_plugin_rm" src="src/android/hooks/android_app_name_remove.js" />
@@ -92,9 +92,9 @@
                     <key>AccessToken-Prod</key>
                     <string>$PRODACCESSTOKEN</string>
                     <key>UseGeofences</key>
-                    <string>false</string>
+                    <string>true</string>
                     <key>UseAnalytics</key>
-                    <string>false</string>
+                    <string>true</string>
                 </dict>
         </config-file>
         <config-file target="config.xml" parent="/*">
@@ -105,6 +105,7 @@
 		
 		<config-file target="*-Info.plist" parent="UIBackgroundModes">
            <array>
+			   <string>location</string>
                <string>remote-notification</string>
            </array>
        </config-file>
@@ -114,17 +115,23 @@
 		<header-file src="src/ios/AppDelegate+MCPlugin.h" />
 		<source-file src="src/ios/AppDelegate+MCPlugin.m" />
 		
-        <source-file src="src/ios/etpushsdk/libJB4ASDK-4.1.0.a" framework="true" />
-        <header-file src="src/ios/etpushsdk/ETAnalytics.h" />
-        <header-file src="src/ios/etpushsdk/ETGenericUpdate.h" />
+		<header-file src="src/ios/etpushsdk/ETAnalytics.h" />
+		<header-file src="src/ios/etpushsdk/ETCloudPage.h" />
+		<header-file src="src/ios/etpushsdk/ETCloudPageDataSource.h" />
+		<header-file src="src/ios/etpushsdk/ETEventMessage.h" />
+		<header-file src="src/ios/etpushsdk/ETEventRegion.h" />
+		<header-file src="src/ios/etpushsdk/ETGenericUpdate.h" />
 		<header-file src="src/ios/etpushsdk/ETLandingPagePresenter.h" />
 		<header-file src="src/ios/etpushsdk/ETLocationManager.h" />
-		<header-file src="src/ios/etpushsdk/ETLocationUpdate.h" />
 		<header-file src="src/ios/etpushsdk/ETMessage.h" />
 		<header-file src="src/ios/etpushsdk/ETPush.h" />
 		<header-file src="src/ios/etpushsdk/ETRegion.h" />
+		<header-file src="src/ios/etpushsdk/ETWKLandingPagePresenter.h" />
 		<header-file src="src/ios/etpushsdk/ExactTargetEnhancedPushDataSource.h" />
+		<header-file src="src/ios/etpushsdk/JB4ASDK-Bridging-Header.h" />
+        <source-file src="src/ios/etpushsdk/libJB4ASDK-4.3.0.160300007.a" framework="true" />
 		<header-file src="src/ios/etpushsdk/PushConstants.h" />
+		
 		<framework src="libsqlite3.dylib" />
         <framework src="CoreLocation.framework/" />
 		<framework src="Security.framework/" />
