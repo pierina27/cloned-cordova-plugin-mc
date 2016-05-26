@@ -14,8 +14,9 @@
 - (void)removeAttribute:(CDVInvokedUrlCommand*)command;
 - (void)addTag:(CDVInvokedUrlCommand*)command;
 - (void)removeTag:(CDVInvokedUrlCommand*)command;
-- (void)monitorLocation:(CDVInvokedUrlCommand*)command;
-- (void)unmonitorLocation:(CDVInvokedUrlCommand*)command;
+- (void)startWatchingLocation:(CDVInvokedUrlCommand*)command;
+- (void)stopWatchingLocation:(CDVInvokedUrlCommand*)command;
+- (void)isWatchingLocation:(CDVInvokedUrlCommand*)command;
 - (void)getSDKState:(CDVInvokedUrlCommand*)command;
 - (void)registerNotification:(CDVInvokedUrlCommand*)command;
 - (void)notifyOfMessage:(NSData*) payload;

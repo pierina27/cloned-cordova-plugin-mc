@@ -23,7 +23,7 @@ static MCPlugin *etPluginInstance;
 {
     etPluginInstance = self;
     [self.commandDelegate runInBackground:^{
-
+        
         CDVPluginResult* pluginResult = nil;
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -133,13 +133,25 @@ static MCPlugin *etPluginInstance;
 // MONITOR LOCATION //
 - (void) startWatchingLocation:(CDVInvokedUrlCommand *)command {
     [self.commandDelegate runInBackground:^ {
+        NSLog(@"startWatchingLocation called");
         [[ETLocationManager sharedInstance] startWatchingLocation];
     }];
 }
 
 - (void) stopWatchingLocation:(CDVInvokedUrlCommand *)command {
     [self.commandDelegate runInBackground:^ {
+        NSLog(@"stopWatchingLocation called");
         [[ETLocationManager sharedInstance] stopWatchingLocation];
+    }];
+}
+
+- (void) isWatchingLocation:(CDVInvokedUrlCommand *)command {
+    [self.commandDelegate runInBackground:^ {
+        BOOL* isWatchingLocation = [[ETLocationManager sharedInstance] getWatchingLocation];
+        CDVPluginResult* pluginResult = nil;
+        
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:isWatchingLocation ? @"true" : @"false"];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
 }
 

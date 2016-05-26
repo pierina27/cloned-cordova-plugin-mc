@@ -81,6 +81,10 @@
 	
 	<!-- IOS CONFIGURATION -->
 	<platform name="ios">
+		<!-- ESTO ES NECESARIO PARA QUE FUNCIONE LA GEOLOCALIZACIÓN -->
+		<config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
+            <string>La aplicación utiliza la ubicación para mejorar la experiencia de usuario</string>
+        </config-file>
         <config-file target="*-Info.plist" parent="ETAppSettings">
                 <dict>
                     <key>ApplicationID-Dev</key>
@@ -135,6 +139,7 @@
 		<framework src="libsqlite3.dylib" />
         <framework src="CoreLocation.framework/" />
 		<framework src="Security.framework/" />
+		<framework src="WebKit.framework/"/>
     </platform>
 	
 </plugin>
