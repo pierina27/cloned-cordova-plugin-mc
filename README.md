@@ -3,8 +3,9 @@
 
 ##Release History
 #### Version 2.0
-- Android SDK 4.3.2
-- Added Geofence capabilities (testing status)
+- Android SDK 4.4.0
+- iOS SDK 4.3.0
+- Added Geofence capabilities
 
 #### Version 1.2
 - Added Android >5.0 status bar notification icon resource. (See Android compilation details)
@@ -34,10 +35,8 @@ You will need to ensure that you have installed the following items through the 
 - Google Play Services version 27 or greater
 - Google Repository version 22 or greater
 
-For Android >5.0 status bar icon, you must to include transparent solid color icon with name 'mc_plugin_stat_icon.png' in the 'res' folder, in the same way you add the application icons.
+For Android >5.0 status bar icon, you must to include transparent solid color icon with name 'mc_plugin_stat_icon.png' in the 'res' folder, in the same way you add the other application icons.
 If you do not set this resource, then the SDK will use the default icon for your app which may not meet the standards for Android 5.0.
-
-You must configure Cordova with Android target version 22. Version 23 will crash on Android 6 due to the new runtime permissions.
 
 #### Cordova-iOS 4 known issue
 
@@ -84,7 +83,7 @@ MCPlugin.startWatchingLocation();
 MCPlugin.stopWatchingLocation();
 MCPlugin.isWatchingLocation(function(result){
 	console.log(result)
-	//result = "true" if is watching location
+	//result = "true"|"false" depending on location status
 });
 ```
 
