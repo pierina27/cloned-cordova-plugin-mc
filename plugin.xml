@@ -84,7 +84,14 @@
 		<!-- ESTO ES NECESARIO PARA QUE FUNCIONE LA GEOLOCALIZACIÓN -->
 		<config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
             <string>La aplicación utiliza la ubicación para mejorar la experiencia de usuario</string>
-        </config-file>
+		</config-file>
+		<config-file target="*-Info.plist" parent="UIBackgroundModes">
+			<array>
+				<string>fetch</string>
+				<string>location</string>
+				<string>remote-notification</string>
+			</array>
+		</config-file>
         <config-file target="*-Info.plist" parent="ETAppSettings">
                 <dict>
                     <key>ApplicationID-Dev</key>
@@ -136,7 +143,7 @@
         <source-file src="src/ios/etpushsdk/libJB4ASDK-4.3.0.160300007.a" framework="true" />
 		<header-file src="src/ios/etpushsdk/PushConstants.h" />
 		
-		<framework src="libsqlite3.dylib" />
+		<!--<framework src="libsqlite3.dylib" />-->
         <framework src="CoreLocation.framework/" />
 		<framework src="Security.framework/" />
 		<framework src="WebKit.framework/"/>
