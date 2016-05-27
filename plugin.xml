@@ -38,9 +38,9 @@
     </js-module>
 	
 	<!-- Installation parameters -->	
-	<preference name="PRODAPPID" />
-	<preference name="PRODACCESSTOKEN" />
-	<preference name="PRODGCMSENDERID" />
+	<preference name="APPID" />
+	<preference name="ACCESSTOKEN" />
+	<preference name="GCMSENDERID" />
 
     <engines>
       <engine name="cordova-android" version=">=4.0.0" />
@@ -60,13 +60,11 @@
         </config-file>
 		
 		<config-file target="res/values/strings.xml" parent="/resources">
-			<string name="et_app_id_dev">$PRODAPPID</string>
-			<string name="et_access_token_dev">$PRODACCESSTOKEN</string>
-			<string name="gcm_sender_id_dev">$PRODGCMSENDERID</string>
-			<string name="et_app_id_prod">$PRODAPPID</string>
-			<string name="et_access_token_prod">$PRODACCESSTOKEN</string>
-			<string name="gcm_sender_id_prod">$PRODGCMSENDERID</string>
-			<!--<bool name="mc_enablelocation">$ENABLELOCATION</bool>-->
+			<string name="mc_app_id">$APPID</string>
+			<string name="mc_access_token">$ACCESSTOKEN</string>
+			<string name="gcm_sender_id">$GCMSENDERID</string>
+			<bool name="mc_enable_location">true</bool>
+			<bool name="mc_enable_analitycs">true</bool>
  		</config-file>
 		
 		<framework src="src/android/MCPlugin.gradle" custom="true" type="gradleReference"/>
@@ -94,17 +92,13 @@
 		</config-file>
         <config-file target="*-Info.plist" parent="ETAppSettings">
                 <dict>
-                    <key>ApplicationID-Dev</key>
-                    <string>$PRODAPPID</string>
-                    <key>AccessToken-Dev</key>
-                    <string>$PRODACCESSTOKEN</string>
-                    <key>ApplicationID-Prod</key>
-                    <string>$PRODAPPID</string>
-                    <key>AccessToken-Prod</key>
-                    <string>$PRODACCESSTOKEN</string>
-                    <key>UseGeofences</key>
+                    <key>mc_app_id</key>
+                    <string>$APPID</string>
+                    <key>mc_access_token</key>
+                    <string>$ACCESSTOKEN</string>
+                    <key>mc_enable_location</key>
                     <string>true</string>
-                    <key>UseAnalytics</key>
+                    <key>mc_enable_analitycs</key>
                     <string>true</string>
                 </dict>
         </config-file>

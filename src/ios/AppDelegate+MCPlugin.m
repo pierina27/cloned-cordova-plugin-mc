@@ -25,11 +25,11 @@ static NSData *lastPush;
 	
 NSBundle* mainBundle = [NSBundle mainBundle];
     NSDictionary* ETSettings = [mainBundle objectForInfoDictionaryKey:@"ETAppSettings"];
-    BOOL useGeoLocation = [[ETSettings objectForKey:@"UseGeofences"] boolValue];
-    BOOL useAnalytics = [[ETSettings objectForKey:@"UseAnalytics"] boolValue];
+    BOOL useGeoLocation = [[ETSettings objectForKey:@"mc_enable_location"] boolValue];
+    BOOL useAnalytics = [[ETSettings objectForKey:@"mc_enable_analitycs"] boolValue];
 	
-    NSString* prodAppID = [ETSettings objectForKey:@"ApplicationID-Prod"];
-    NSString* prodAccessToken = [ETSettings objectForKey:@"AccessToken-Prod"];
+    NSString* prodAppID = [ETSettings objectForKey:@"mc_app_id"];
+    NSString* prodAccessToken = [ETSettings objectForKey:@"mc_access_token"];
     // configure and set initial settings of the JB4ASDK
 	[ETPush setETLoggerToRequiredState:YES];
     successful = [[ETPush pushManager] configureSDKWithAppID:prodAppID
@@ -69,6 +69,8 @@ NSBundle* mainBundle = [NSBundle mainBundle];
 
         [[ETLocationManager sharedInstance] startWatchingLocation];
 		[ETRegion retrieveGeofencesFromET];
+		
+		[[ETPush pushManager] addTag:@"leadclic-mc-plugin v2.0"];
         
         // inform the JB4ASDK of the launch options - possibly UIApplicationLaunchOptionsRemoteNotificationKey or UIApplicationLaunchOptionsLocalNotificationKey
         [[ETPush pushManager] applicationLaunchedWithOptions:launchOptions];

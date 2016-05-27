@@ -42,6 +42,7 @@ public class MCPlugin extends CordovaPlugin {
 			// READY //
 			if (action.equals("ready")) {
 				//ETPush.getInstance().enablePush();
+				startLocation(callbackContext);
 			}
 			// NOTIFICATION CALLBACK REGISTER //
 			else if (action.equals("registerNotification")) {
@@ -76,20 +77,7 @@ public class MCPlugin extends CordovaPlugin {
 			}
 			// MONITOR LOCATION //
 			else if (action.equals("startWatchingLocation")) {
-				if(android.os.Build.VERSION.SDK_INT<android.os.Build.VERSION_CODES.M || cordova.hasPermission(ACCESS_LOCATION)){
-					cordova.getThreadPool().execute(new Runnable() {
-						public void run() {
-							try{
-								ETLocationManager.locationManager().startWatchingLocation();
-							}catch(Exception e){
-								Log.d(TAG, "ERROR: onStartWatchingLocation: " + e.getMessage());
-								callbackContext.error(e.getMessage());
-							}
-						}
-					});
-				}else{
-					cordova.requestPermission(this, PERMISSION_LOCATION, ACCESS_LOCATION);
-				}
+				startLocation(callbackContext);
 			}
 			else if (action.equals("stopWatchingLocation")) {
 				cordova.getThreadPool().execute(new Runnable() {
@@ -138,6 +126,23 @@ public class MCPlugin extends CordovaPlugin {
         //});
 		callbackContext.success("Received " + action);
 		return true;
+	}
+	
+	public void startLocation(final CallbackContext callbackContext){
+		if(android.os.Build.VERSION.SDK_INT<android.os.Build.VERSION_CODES.M || cordova.hasPermission(ACCESS_LOCATION)){
+			cordova.getThreadPool().execute(new Runnable() {
+				public void run() {
+					try{
+						ETLocationManager.locationManager().startWatchingLocation();
+					}catch(Exception e){
+						Log.d(TAG, "ERROR: onStartWatchingLocation: " + e.getMessage());
+						callbackContext.error(e.getMessage());
+					}
+				}
+			});
+		}else{
+			cordova.requestPermission(this, PERMISSION_LOCATION, ACCESS_LOCATION);
+		}
 	}
 	
 	public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) throws JSONException {

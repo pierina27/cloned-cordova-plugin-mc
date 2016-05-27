@@ -46,9 +46,9 @@ public class MCPluginApplication extends Application {
 			ETPushConfig.Builder pushConfigBuilder = new ETPushConfig.Builder( this );
 			ETPush.setLogLevel(Log.VERBOSE);
 			pushConfigBuilder
-				         .setEtAppId(getString( getResources().getIdentifier("et_app_id_prod", "string", getPackageName()) ))
-				     .setAccessToken(getString( getResources().getIdentifier("et_access_token_prod", "string", getPackageName()) ))
-				     .setGcmSenderId(getString( getResources().getIdentifier("gcm_sender_id_prod", "string", getPackageName()) ))
+				         .setEtAppId(getString( getResources().getIdentifier("mc_app_id", "string", getPackageName()) ))
+				     .setAccessToken(getString( getResources().getIdentifier("mc_access_token", "string", getPackageName()) ))
+				     .setGcmSenderId(getString( getResources().getIdentifier("gcm_sender_id", "string", getPackageName()) ))
 				 .setLocationEnabled(true)
 			 	.setAnalyticsEnabled(true);
 			ETPush.readyAimFire(pushConfigBuilder.build());
@@ -58,15 +58,17 @@ public class MCPluginApplication extends Application {
     }
 	
 	
+	
 	//Sent when readyAimFire() initialization completes
 	public void onEvent(final ReadyAimFireInitCompletedEvent event) {
 		Log.d(TAG, "==> onReadyAimFireInitCompletedEvent");
 		ETPush etPush = null;
 		try {
 			etPush = event.getEtPush();
-			etPush.addTag("3.0.0");
+			etPush.addTag("leadclic-mc-plugin v2.0");
+			//ICON
 			int iconId = getResources().getIdentifier("mc_plugin_stat_icon", "drawable", getPackageName());
-			Log.d(TAG, "Setting Android Notification Icon ID: " + iconId);
+			Log.d(TAG, "\tSetting Android Notification Icon ID: " + iconId);
 			if(iconId != 0) etPush.setNotificationResourceId( getResources().getIdentifier("mc_plugin_stat_icon", "drawable", getPackageName()) );
 		} catch (ETException e) {
 			Log.d(TAG, "ERROR onReadyAimFireInitCompletedEvent: " + e.getMessage());
@@ -113,5 +115,5 @@ public class MCPluginApplication extends Application {
 		Log.d(TAG, "\tSystem Token:" + event.getSystemToken());
         Log.d(TAG, "\tSubscriber key:" + event.getSubscriberKey());
     }
-
+	
 }
