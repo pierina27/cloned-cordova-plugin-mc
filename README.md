@@ -21,9 +21,9 @@
 ##Installation
 ```Bash
 cordova plugin add https://github.com/soporteleadclic/cordova-plugin-mc \
-	--variable PRODAPPID='xxxxx-xxxx-xxxx-xxxx-xxxxxxxx' \
-	--variable PRODACCESSTOKEN='xxxxxxxxxxxxxxxxxx' \
-	--variable PRODGCMSENDERID='xxxxxxxxxxxxxx' \
+	--variable APPID='xxxxx-xxxx-xxxx-xxxx-xxxxxxxx' \
+	--variable ACCESSTOKEN='xxxxxxxxxxxxxxxxxx' \
+	--variable GCMSENDERID='xxxxxxxxxxxxxx' \
 
 ```
 
