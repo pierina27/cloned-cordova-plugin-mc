@@ -151,7 +151,7 @@
 		<header-file src="src/ios/etpushsdk/ETRegion.h" />
 		<header-file src="src/ios/etpushsdk/ExactTargetEnhancedPushDataSource.h" />
 		<header-file src="src/ios/etpushsdk/PushConstants.h" />
-		<framework src="libsqlite3.dylib" />
+		<!--<framework src="libsqlite3.dylib" />-->
         <framework src="CoreLocation.framework/" />
 		<framework src="Security.framework/" />
     </platform>
