@@ -79,8 +79,7 @@ The URL must include the protocol (http:// or https://).
 ####Geofence
 
 ```javascript
-MCPlugin.startWatchingLocation();
-MCPlugin.stopWatchingLocation();
+//Geofence capabilities are enabled by default
 MCPlugin.isWatchingLocation(function(result){
 	console.log(result)
 	//result = "true"|"false" depending on location status
