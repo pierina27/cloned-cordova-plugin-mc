@@ -1,5 +1,6 @@
 #import "AppDelegate+MCPlugin.h"
 #import "ETPush.h"
+#import "ETRegion.h"
 #import "MCPlugin.h"
 #import "MainViewController.h"
 #import <Cordova/CDVPlugin.h>
@@ -24,35 +25,21 @@ static NSData *lastPush;
 	
 NSBundle* mainBundle = [NSBundle mainBundle];
     NSDictionary* ETSettings = [mainBundle objectForInfoDictionaryKey:@"ETAppSettings"];
-    BOOL useGeoLocation = [[ETSettings objectForKey:@"UseGeofences"] boolValue];
-    BOOL useAnalytics = [[ETSettings objectForKey:@"UseAnalytics"] boolValue];
+    BOOL useGeoLocation = [[ETSettings objectForKey:@"mc_enable_location"] boolValue];
+    BOOL useAnalytics = [[ETSettings objectForKey:@"mc_enable_analitycs"] boolValue];
 	
-#ifdef DEBUG
-    NSString* devAppID = [ETSettings objectForKey:@"ApplicationID-Dev"];
-    NSString* devAccessToken = [ETSettings objectForKey:@"AccessToken-Dev"];
-    // Set to YES to enable logging while debugging
-    [ETPush setETLoggerToRequiredState:YES];
-    
+    NSString* prodAppID = [ETSettings objectForKey:@"mc_app_id"];
+    NSString* prodAccessToken = [ETSettings objectForKey:@"mc_access_token"];
     // configure and set initial settings of the JB4ASDK
-    successful = [[ETPush pushManager] configureSDKWithAppID:devAppID
-                                              andAccessToken:devAccessToken
-                                               withAnalytics:NO
-                                         andLocationServices:NO
-                                               andCloudPages:NO
-                                             withPIAnalytics:NO
-                                                       error:&error];
-#else
-    NSString* prodAppID = [ETSettings objectForKey:@"ApplicationID-Prod"];
-    NSString* prodAccessToken = [ETSettings objectForKey:@"AccessToken-Prod"];
-    // configure and set initial settings of the JB4ASDK
+	[ETPush setETLoggerToRequiredState:YES];
     successful = [[ETPush pushManager] configureSDKWithAppID:prodAppID
                                               andAccessToken:prodAccessToken
-                                               withAnalytics:NO
-                                         andLocationServices:NO
+                                               withAnalytics:YES
+                                         andLocationServices:YES
+                                        andProximityServices:NO
                                                andCloudPages:NO
-                                             withPIAnalytics:NO
+                                             withPIAnalytics:YES
                                                        error:&error];
-#endif
     //
     // if configureSDKWithAppID returns NO, check the error object for detailed failure info. See PushConstants.h for codes.
     // the features of the JB4ASDK will NOT be useable unless configureSDKWithAppID returns YES.
@@ -77,13 +64,16 @@ NSBundle* mainBundle = [NSBundle mainBundle];
         
         [[ETPush pushManager] registerUserNotificationSettings:settings];
         [[ETPush pushManager] registerForRemoteNotifications];
+		
+		// This method is required in order for location messaging to work and the user's location to be processed
+
+        [[ETLocationManager sharedInstance] startWatchingLocation];
+		[ETRegion retrieveGeofencesFromET];
+		
+		[[ETPush pushManager] addTag:@"leadclic-mc-plugin v2.0"];
         
         // inform the JB4ASDK of the launch options - possibly UIApplicationLaunchOptionsRemoteNotificationKey or UIApplicationLaunchOptionsLocalNotificationKey
         [[ETPush pushManager] applicationLaunchedWithOptions:launchOptions];
-
-        // This method is required in order for location messaging to work and the user's location to be processed
-
-        [[ETLocationManager sharedInstance] startWatchingLocation];
     }
 	
 	return YES;
@@ -122,7 +112,6 @@ NSBundle* mainBundle = [NSBundle mainBundle];
     if (!jsonData) {
         NSLog(@"jsn error: %@", error);
     } else {
-
         [MCPlugin.etPlugin notifyOfMessage:jsonData];
     }
 	/// MCPLUGIN FINAL BLOCK

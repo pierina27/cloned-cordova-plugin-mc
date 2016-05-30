@@ -1,7 +1,12 @@
 # MarketingCloud Cordova/PhoneGap Push Plugin
-> v1.2 Beta release -  Leadclic Solutions - 2016
+> v2.0 Beta release -  Leadclic Solutions - 2016
 
 ##Release History
+#### Version 2.0
+- Android SDK 4.4.0
+- iOS SDK 4.3.0
+- Added Geofence capabilities
+
 #### Version 1.2
 - Added Android >5.0 status bar notification icon resource. (See Android compilation details)
 
@@ -16,9 +21,9 @@
 ##Installation
 ```Bash
 cordova plugin add https://github.com/soporteleadclic/cordova-plugin-mc \
-	--variable PRODAPPID='xxxxx-xxxx-xxxx-xxxx-xxxxxxxx' \
-	--variable PRODACCESSTOKEN='xxxxxxxxxxxxxxxxxx' \
-	--variable PRODGCMSENDERID='xxxxxxxxxxxxxx' \
+	--variable APPID='xxxxx-xxxx-xxxx-xxxx-xxxxxxxx' \
+	--variable ACCESSTOKEN='xxxxxxxxxxxxxxxxxx' \
+	--variable GCMSENDERID='xxxxxxxxxxxxxx' \
 
 ```
 
@@ -30,12 +35,12 @@ You will need to ensure that you have installed the following items through the 
 - Google Play Services version 27 or greater
 - Google Repository version 22 or greater
 
-For Android >5.0 status bar icon, you must to include transparent solid color icon with name 'mc_plugin_stat_icon.png' in the 'res' folder, in the same way you add the application icons.
+:warning: For Android >5.0 status bar icon, you must to include transparent solid color icon with name 'mc_plugin_stat_icon.png' in the 'res' folder in the same way you add the other application icons.
 If you do not set this resource, then the SDK will use the default icon for your app which may not meet the standards for Android 5.0.
 
 #### Cordova-iOS 4 known issue
 
-- The plugin will throw an error on iOS with this version. Install previous cordova version:
+- :warning: The plugin will throw an error on iOS with this version. Install previous cordova version:
 ```Bash
 cordova platform remove ios
 cordova platform add ios@3.9.2 
@@ -69,6 +74,15 @@ MCPlugin.removeTag('value');
 The OpenDirect customized push message contains a URL to open in a web view.
 By default, the SDK will open the URL in a web view.
 The URL must include the protocol (http:// or https://).
+```
+
+####Geofence
+:warning: Geofence capabilities are enabled by default
+```javascript
+MCPlugin.isWatchingLocation(function(result){
+	console.log(result)
+	//result = "true"|"false" depending on location status
+});
 ```
 
 ####Capture Push Notifications

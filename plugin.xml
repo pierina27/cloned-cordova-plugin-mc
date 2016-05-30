@@ -38,9 +38,9 @@
     </js-module>
 	
 	<!-- Installation parameters -->	
-	<preference name="PRODAPPID" />
-	<preference name="PRODACCESSTOKEN" />
-	<preference name="PRODGCMSENDERID" />
+	<preference name="APPID" />
+	<preference name="ACCESSTOKEN" />
+	<preference name="GCMSENDERID" />
 
     <engines>
       <engine name="cordova-android" version=">=4.0.0" />
@@ -49,56 +49,28 @@
 	<!-- ANDROID CONFIGURATION -->
     <platform name="android">
 		<config-file target="AndroidManifest.xml" parent="/manifest">
-			<uses-permission android:name="android.permission.INTERNET" />
-			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-			<permission android:name="${applicationId}.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-			<uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
-			<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-			<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-			<uses-permission android:name="android.permission.WAKE_LOCK" />
-		</config-file>
-		<config-file target="AndroidManifest.xml" parent="/manifest/application">
-			<receiver android:name="com.exacttarget.etpushsdk.ETPushReceiver" android:permission="com.google.android.c2dm.permission.SEND">
-				<intent-filter>
-					<action android:name="${applicationId}.MESSAGE_OPENED" />
-					<action android:name="com.exacttarget.etpushsdk.SEND_REGISTRATION" />
-					<action android:name="com.google.android.c2dm.intent.RECEIVE" />
-					<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-					<action android:name="android.intent.action.ACTION_SHUTDOWN" />
-					<action android:name="android.intent.action.AIRPLANE_MODE" />
-					<category android:name="${applicationId}" />
-				</intent-filter>
-				<intent-filter>
-					<action android:name="android.intent.action.PACKAGE_REPLACED" />
-					<data android:scheme="package" />
-				</intent-filter>
-			</receiver>
-			<service android:enabled="true" android:name="com.exacttarget.etpushsdk.ETPushService" />
-			<activity android:label="Landing Page" android:name="com.exacttarget.etpushsdk.ETLandingPagePresenter" />
+			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+			<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 		</config-file>
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="MCPlugin" >
-                <param name="android-package" value="com.leadclic.MCPlugin"/>
+                <param name="android-package" value="com.leadclic.test.plugin.MCPlugin"/>
                 <param name="onload" value="true" />
             </feature>
         </config-file>
 		
 		<config-file target="res/values/strings.xml" parent="/resources">
-			<string name="et_app_id_dev">$PRODAPPID</string>
-			<string name="et_access_token_dev">$PRODACCESSTOKEN</string>
-			<string name="gcm_sender_id_dev">$PRODGCMSENDERID</string>
-			<string name="et_app_id_prod">$PRODAPPID</string>
-			<string name="et_access_token_prod">$PRODACCESSTOKEN</string>
-			<string name="gcm_sender_id_prod">$PRODGCMSENDERID</string>
+			<string name="mc_app_id">$APPID</string>
+			<string name="mc_access_token">$ACCESSTOKEN</string>
+			<string name="gcm_sender_id">$GCMSENDERID</string>
+			<bool name="mc_enable_location">true</bool>
+			<bool name="mc_enable_analitycs">true</bool>
  		</config-file>
 		
-		<framework src="com.android.support:support-v13:23+" />
-        <framework src="com.google.android.gms:play-services-gcm:+" />
+		<framework src="src/android/MCPlugin.gradle" custom="true" type="gradleReference"/>
 		
-        <source-file src="src/android/MCPlugin.java" target-dir="src/com/leadclic" />
-		<source-file src="src/android/MCPluginApplication.java" target-dir="src/com/leadclic" />
-		<source-file src="src/android/etsdk-4.2.0.jar" target-dir="libs" />
+        <source-file src="src/android/MCPlugin.java" target-dir="src/com/leadclic/test/plugin" />
+		<source-file src="src/android/MCPluginApplication.java" target-dir="src/com/leadclic/test/plugin" />
 		
 		<hook type="after_plugin_add" src="src/android/hooks/android_app_name.js" />
 		<hook type="before_plugin_rm" src="src/android/hooks/android_app_name_remove.js" />
@@ -107,20 +79,27 @@
 	
 	<!-- IOS CONFIGURATION -->
 	<platform name="ios">
+		<!-- ESTO ES NECESARIO PARA QUE FUNCIONE LA GEOLOCALIZACIÓN -->
+		<config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
+            <string>La aplicación utiliza la ubicación para mejorar la experiencia de usuario</string>
+		</config-file>
+		<config-file target="*-Info.plist" parent="UIBackgroundModes">
+			<array>
+				<string>fetch</string>
+				<string>location</string>
+				<string>remote-notification</string>
+			</array>
+		</config-file>
         <config-file target="*-Info.plist" parent="ETAppSettings">
                 <dict>
-                    <key>ApplicationID-Dev</key>
-                    <string>$PRODAPPID</string>
-                    <key>AccessToken-Dev</key>
-                    <string>$PRODACCESSTOKEN</string>
-                    <key>ApplicationID-Prod</key>
-                    <string>$PRODAPPID</string>
-                    <key>AccessToken-Prod</key>
-                    <string>$PRODACCESSTOKEN</string>
-                    <key>UseGeofences</key>
-                    <string>false</string>
-                    <key>UseAnalytics</key>
-                    <string>false</string>
+                    <key>mc_app_id</key>
+                    <string>$APPID</string>
+                    <key>mc_access_token</key>
+                    <string>$ACCESSTOKEN</string>
+                    <key>mc_enable_location</key>
+                    <string>true</string>
+                    <key>mc_enable_analitycs</key>
+                    <string>true</string>
                 </dict>
         </config-file>
         <config-file target="config.xml" parent="/*">
@@ -131,6 +110,7 @@
 		
 		<config-file target="*-Info.plist" parent="UIBackgroundModes">
            <array>
+			   <string>location</string>
                <string>remote-notification</string>
            </array>
        </config-file>
@@ -140,20 +120,27 @@
 		<header-file src="src/ios/AppDelegate+MCPlugin.h" />
 		<source-file src="src/ios/AppDelegate+MCPlugin.m" />
 		
-        <source-file src="src/ios/etpushsdk/libJB4ASDK-4.1.0.a" framework="true" />
-        <header-file src="src/ios/etpushsdk/ETAnalytics.h" />
-        <header-file src="src/ios/etpushsdk/ETGenericUpdate.h" />
+		<header-file src="src/ios/etpushsdk/ETAnalytics.h" />
+		<header-file src="src/ios/etpushsdk/ETCloudPage.h" />
+		<header-file src="src/ios/etpushsdk/ETCloudPageDataSource.h" />
+		<header-file src="src/ios/etpushsdk/ETEventMessage.h" />
+		<header-file src="src/ios/etpushsdk/ETEventRegion.h" />
+		<header-file src="src/ios/etpushsdk/ETGenericUpdate.h" />
 		<header-file src="src/ios/etpushsdk/ETLandingPagePresenter.h" />
 		<header-file src="src/ios/etpushsdk/ETLocationManager.h" />
-		<header-file src="src/ios/etpushsdk/ETLocationUpdate.h" />
 		<header-file src="src/ios/etpushsdk/ETMessage.h" />
 		<header-file src="src/ios/etpushsdk/ETPush.h" />
 		<header-file src="src/ios/etpushsdk/ETRegion.h" />
+		<header-file src="src/ios/etpushsdk/ETWKLandingPagePresenter.h" />
 		<header-file src="src/ios/etpushsdk/ExactTargetEnhancedPushDataSource.h" />
+		<header-file src="src/ios/etpushsdk/JB4ASDK-Bridging-Header.h" />
+        <source-file src="src/ios/etpushsdk/libJB4ASDK-4.3.0.160300007.a" framework="true" />
 		<header-file src="src/ios/etpushsdk/PushConstants.h" />
+
 		<!--<framework src="libsqlite3.dylib" />-->
         <framework src="CoreLocation.framework/" />
 		<framework src="Security.framework/" />
+		<framework src="WebKit.framework/"/>
     </platform>
 	
 </plugin>
