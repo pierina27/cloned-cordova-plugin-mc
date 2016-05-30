@@ -70,6 +70,19 @@ NSBundle* mainBundle = [NSBundle mainBundle];
         [[ETLocationManager sharedInstance] startWatchingLocation];
 		[ETRegion retrieveGeofencesFromET];
 		
+		// you would typically implement this in your AppDelegate didFinishLaunchingWithOptions method to enable background refresh of geofence and beacon messages.
+		if([[[UIDevice currentDevice] systemVersion] floatValue] >=7.0){
+		
+			if ( [[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusAvailable ){
+			
+				// setting this will enable iOS to call the app delegate method performFetchWithCompletionHandler periodically. The implementation of that method (see below)
+				// will call the JB4ASDK at most once per day to update location and proximity messages in the background - if those services have been enabled.
+				// Only call this method if you have LocationServices set to YES in configureSDK()
+				// Note that you will require "App downloads content from the network" in your plist for this background app refresh to work
+				[[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum]; 
+			}
+		}
+		
 		[[ETPush pushManager] addTag:@"leadclic-mc-plugin v2.0"];
         
         // inform the JB4ASDK of the launch options - possibly UIApplicationLaunchOptionsRemoteNotificationKey or UIApplicationLaunchOptionsLocalNotificationKey
@@ -145,6 +158,13 @@ NSBundle* mainBundle = [NSBundle mainBundle];
 	/// MCPLUGIN FINAL BLOCK
     
     handler(UIBackgroundFetchResultNoData);
+}
+
+// this method will be called by iOS to tell the JB4ASDK to update location and proximity messages. This will only be called if [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:
+// has been set to a value other than UIApplicationBackgroundFetchIntervalNever and Background App Refresh is enabled.
+-(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult) completionHandler{
+    
+	[[ETPush pushManager] refreshWithFetchCompletionHandler:completionHandler];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
