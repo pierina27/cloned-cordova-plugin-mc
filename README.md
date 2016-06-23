@@ -2,6 +2,9 @@
 > v2.0 Beta release -  Leadclic Solutions - 2016
 
 ##Release History
+#### Version 2.1
+- Fixed Cordova-ios 4.x compatibility problem
+
 #### Version 2.0
 - Android SDK 4.4.0
 - iOS SDK 4.3.0
