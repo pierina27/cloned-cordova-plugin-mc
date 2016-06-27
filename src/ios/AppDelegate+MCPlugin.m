@@ -162,7 +162,7 @@ NSBundle* mainBundle = [NSBundle mainBundle];
 
 // this method will be called by iOS to tell the JB4ASDK to update location and proximity messages. This will only be called if [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:
 // has been set to a value other than UIApplicationBackgroundFetchIntervalNever and Background App Refresh is enabled.
--(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult) completionHandler{
+-(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result)) completionHandler{
     
 	[[ETPush pushManager] refreshWithFetchCompletionHandler:completionHandler];
 }
