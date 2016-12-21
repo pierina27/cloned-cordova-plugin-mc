@@ -50,7 +50,7 @@ typedef NS_ENUM(NSInteger, LocationUpdateAppState)
  Returns a reference to the shared loc manager.
  This method is deprecated. Please use sharedInstance instead.
 */
-+(ETLocationManager *)locationManager DEPRECATED_MSG_ATTRIBUTE("Use sharedInstance instead.");
++(ETLocationManager *)locationManager DEPRECATED_MSG_ATTRIBUTE("The locationManager method is deprecated. Please use sharedInstance instead.");
 
 /**
   + Returns a reference to the shared ETLocationManager
@@ -89,7 +89,6 @@ typedef NS_ENUM(NSInteger, LocationUpdateAppState)
  
  @param loc a CLLocation value.
  @param state a LocationUpdateAppState value.
- @return no value returned.
  */
 -(void)updateLocationAndRetrieveMessages:(CLLocation *)loc forAppState:(LocationUpdateAppState)state;
 
@@ -100,7 +99,6 @@ typedef NS_ENUM(NSInteger, LocationUpdateAppState)
  @param fences The set to monitor. 
  @param requestType ETRegionRequestType NS_ENUM value
  
- @return void no return value.
  */
 -(void)monitorRegions:(NSSet<__kindof CLRegion *> *)fences ofRequestType:(ETRegionRequestType)requestType;
 

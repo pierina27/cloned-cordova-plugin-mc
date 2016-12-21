@@ -55,9 +55,11 @@ static NSString * const ETPIAnalyticsActive       = @"ETPIAnalyticsActive";
  */
 typedef NS_ENUM (NSUInteger, pushOriginationState){
     /** PushOriginationStateBackground  */
-    PushOriginationStateBackground                    = 0,
+    PushOriginationStateBackground                      = 0,
     /** PushOriginationStateForeground  */
-    PushOriginationStateForeground
+    PushOriginationStateForeground,
+    /** Unknown state  */
+    PushOriginationStateUnknown                         = 999
 };
 
 /**
@@ -91,7 +93,11 @@ typedef NS_ENUM(NSUInteger, configureSDKWithAppIDError) {
     /** configureSDKWithAppIDRunOnceError  */
     configureSDKWithAppIDRunOnceError,
     /** configureSDKWithAppIDInvalidLocationAndProximityError  */
-    configureSDKWithAppIDInvalidLocationAndProximityError
+    configureSDKWithAppIDInvalidLocationAndProximityError,
+    /** configureSDKWithAppIDSimulatorBlobError  */
+    configureSDKWithAppIDSimulatorBlobError,
+    /** configureSDKWithAppIDKeyChainInvalidError  */
+    configureSDKWithAppIDKeyChainInvalidError
 };
 
 /**
@@ -134,10 +140,8 @@ typedef NS_ENUM(NSUInteger, MobilePushMessageType)
     MobilePushMessageTypeUnknown,
     /** Basic - A standard push message */
     MobilePushMessageTypeBasic,
-    /** DO NOT USE - Was a CloudPage message, but that is a ContentType now */
-    MobilePushMessageTypeEnhanced __attribute__((deprecated)),
     /** Geofence Entry */
-    MobilePushMessageTypeFenceEntry,
+    MobilePushMessageTypeFenceEntry = 3,
     /** Geofence Exit */
     MobilePushMessageTypeFenceExit,
     /** Proximity */
@@ -152,10 +156,8 @@ typedef NS_ENUM(NSUInteger, MobilePushGeofenceType) {
     MobilePushGeofenceTypeNone = 0,
     /** MobilePushGeofenceTypeCircle */
     MobilePushGeofenceTypeCircle,
-    /** MobilePushGeofenceTypePolygon */
-    MobilePushGeofenceTypePolygon __attribute__((deprecated)), // Not currently in use.
     /** MobilePushGeofenceTypeProximity */
-    MobilePushGeofenceTypeProximity
+    MobilePushGeofenceTypeProximity = 3
 };
 
 /**
@@ -179,7 +181,9 @@ typedef NS_OPTIONS(NSUInteger, MobilePushContentType) {
     /** Push Message */
     MobilePushContentTypeAlertMessage   = 1 << 0,
     /** CloudPage */
-    MobilePushContentTypePage           = 1 << 1
+    MobilePushContentTypePage           = 1 << 1,
+    /** Enhanced Cloud Page – Pushed Cloud Pages */
+    MobilePushContentTypeEcp = 1 << 31
 };
 
 /**

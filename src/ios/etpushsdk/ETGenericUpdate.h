@@ -35,7 +35,7 @@ typedef NS_ENUM(NSInteger, GenericUpdateSendMethod)
 +(nullable instancetype)alloc;
 -(nullable instancetype)initFromDictionary:(NSDictionary *)dict;
 
-+(NSString *)remoteRoutePath;
++(NSString * _Nullable)remoteRoutePath;
 -(NSString *)remoteRoutePath;
 
 +(NSString *)tableName;
@@ -62,8 +62,7 @@ static NSString * const ETRequestBaseURL = @"https://consumer.exacttargetapis.co
 
 @property (nonatomic) int tag; // The property that started this whole ordeal.
 @property (nonatomic) NSInteger databaseIdentifier;
-@property (nonatomic, strong) NSMutableData *responseData;
-@property (nonatomic, strong) NSHTTPURLResponse *responseCode;
+@property (nonatomic, copy) NSData *responseData;
 @property (nonatomic, assign) UIBackgroundTaskIdentifier backgroundTaskID;
 
 /**
@@ -93,14 +92,14 @@ static NSString * const ETRequestBaseURL = @"https://consumer.exacttargetapis.co
 -(nullable NSDictionary *)jsonPayloadAsDictionary;
 
 /**
- Called by ETPhoneHome after the ETURLConnection is finished. This should handle doing anything that needs to be done to the payload after it's fully received (like, start monitoring for geofences.
+ Called by ETPhoneHome after the session is finished. This should handle doing anything that needs to be done to the payload after it's fully received (like, start monitoring for geofences.
  
  It's called after a respondsToSelector: so it doesn't have to be implemented.
  */
 -(void)processResults;
 
 /** 
- Called by ETPhone if the ETURLConnection fails. This should do it's best to recover what it can, maybe loading things from the database or whatever. 
+ Called by ETPhone if the session fails. This should do it's best to recover what it can, maybe loading things from the database or whatever. 
  
  Sometimes bad things happen when retrieving data from Salesforce. I mean, cellular Internet isn't a perfect science.
  */
@@ -124,12 +123,12 @@ static NSString * const ETRequestBaseURL = @"https://consumer.exacttargetapis.co
  */
 
 /**
- To make the databases self-updating (more or less), we keep track of the version of the local DB that the insert query represents. This number is stored to NSUserDefaults with the key in databaseVersionKey and checked before inserts. If the number returned is less than this number, it drops and recreates the database table. 
+ To make the databases self-updating (more or less), we keep track of the version of the local DB that the insert query represents. This number is stored to ETGeneralSettingsManager with the key in databaseVersionKey and checked before inserts. If the number returned is less than this number, it drops and recreates the database table. 
  */
 -(int)dbVersionNumber;
 
 /** 
- And this is the key to match the dbVersionNumber. It is saved to NSUserDefaults in combination with dbVersionNumber to identify the age of the table.
+ And this is the key to match the dbVersionNumber. It is saved to ETGeneralSettingsManager in combination with dbVersionNumber to identify the age of the table.
  */
 -(NSString *)databaseVersionKey;
 
