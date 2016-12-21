@@ -136,7 +136,7 @@
 		<header-file src="src/ios/etpushsdk/JB4ASDK-Bridging-Header.h" />
         <source-file src="src/ios/etpushsdk/libJB4ASDK-4.3.0.160300007.a" framework="true" />
 		<header-file src="src/ios/etpushsdk/PushConstants.h" />
-		
+
 		<!--<framework src="libsqlite3.dylib" />-->
         <framework src="CoreLocation.framework/" />
 		<framework src="Security.framework/" />

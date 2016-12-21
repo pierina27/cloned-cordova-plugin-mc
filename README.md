@@ -2,6 +2,9 @@
 > v2.0 Beta release -  Leadclic Solutions - 2016
 
 ##Release History
+#### Version 2.1
+- Fixed Cordova-ios 4.x compatibility problem
+
 #### Version 2.0
 - Android SDK 4.4.0
 - iOS SDK 4.3.0
@@ -37,14 +40,6 @@ You will need to ensure that you have installed the following items through the 
 
 :warning: For Android >5.0 status bar icon, you must to include transparent solid color icon with name 'mc_plugin_stat_icon.png' in the 'res' folder in the same way you add the other application icons.
 If you do not set this resource, then the SDK will use the default icon for your app which may not meet the standards for Android 5.0.
-
-#### Cordova-iOS 4 known issue
-
-- :warning: The plugin will throw an error on iOS with this version. Install previous cordova version:
-```Bash
-cordova platform remove ios
-cordova platform add ios@3.9.2 
-```
 
 ##Usage
 

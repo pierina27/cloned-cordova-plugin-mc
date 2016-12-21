@@ -8,6 +8,7 @@
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification;
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler;
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result)) completionHandler;
 - (void)applicationDidBecomeActive:(UIApplication *)application;
 
 @end
