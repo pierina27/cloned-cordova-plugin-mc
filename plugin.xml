@@ -134,7 +134,10 @@
 		<header-file src="src/ios/etpushsdk/ETWKLandingPagePresenter.h" />
 		<header-file src="src/ios/etpushsdk/ExactTargetEnhancedPushDataSource.h" />
 		<header-file src="src/ios/etpushsdk/JB4ASDK-Bridging-Header.h" />
-        <source-file src="src/ios/etpushsdk/libJB4ASDK-4.3.0.160300007.a" framework="true" />
+        <source-file src="src/ios/etpushsdk/libJB4ASDK-4.6.0.160600002.a" framework="true" />
+		<header-file src="src/ios/etpushsdk/PICart.h" />
+		<header-file src="src/ios/etpushsdk/PICartItem.h" />
+		<header-file src="src/ios/etpushsdk/PIOrder.h" />
 		<header-file src="src/ios/etpushsdk/PushConstants.h" />
 
 		<!--<framework src="libsqlite3.dylib" />-->
